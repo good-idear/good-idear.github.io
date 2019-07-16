@@ -10,8 +10,23 @@
   <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<script src="https://me.idealli.com/images/load.gif" data-src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+<link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css" rel="stylesheet">
 <meta name="theme-color" content="#222">
 
+<style>
+    .pace .pace-progress {
+        background: #1E92FB; /*进度条颜色*/
+        height: 3px;
+    }
+    .pace .pace-progress-inner {
+         box-shadow: 0 0 10px #1E92FB, 0 0 5px     #1E92FB; /*阴影颜色*/
+    }
+    .pace .pace-activity {
+        border-top-color: #1E92FB;    /*上边框颜色*/
+        border-left-color: #1E92FB;    /*左边框颜色*/
+    }
+</style>
 
 
 
@@ -213,26 +228,6 @@
           </a>
         </li>
       
-        
-        <li class="menu-item menu-item-archives">
-          <a href="/archives/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
-            
-            Archives
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-schedule">
-          <a href="/schedule/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-calendar"></i> <br>
-            
-            Schedule
-          </a>
-        </li>
-      
 
       
     </ul>
@@ -269,9 +264,9 @@
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/16/Express的学习/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="John Doe">
+      <meta itemprop="name" content="菜菜鸡">
       <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="/images/avatar.jpg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -419,10 +414,10 @@
 </li>
 </ul>
 <h4 id="3-0-Express"><a href="#3-0-Express" class="headerlink" title="3.0.Express"></a>3.0.Express</h4><p>这里使用<code>nodemon</code>来帮我们进行伪热刷新</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">全局安装</span></span><br><span class="line">npm install --global nodemon</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span>全局安装</span><br><span class="line">npm install --global nodemon</span><br></pre></td></tr></table></figure>
 
 <p>安装完毕之后使用：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">node app.js</span><br><span class="line"><span class="meta">#</span><span class="bash"> 改为使用 nodemon</span></span><br><span class="line">nodemon app.js</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">node app.js</span><br><span class="line"><span class="meta">#</span> 改为使用 nodemon</span><br><span class="line">nodemon app.js</span><br></pre></td></tr></table></figure>
 
 <h5 id="3-1-请求静态资源"><a href="#3-1-请求静态资源" class="headerlink" title="3.1.请求静态资源"></a>3.1.请求静态资源</h5><ul>
 <li><p>当以 /public 为第一个参数的时候，可以通过 get 请求直接去 ./public/ 目录里面找对应的文件，也可以外联式访问，比如css,js的样式</p>
@@ -613,7 +608,7 @@
 </ul>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mongo  这样就行</span><br></pre></td></tr></table></figure>
 
-<h5 id="基本命令"><a href="#基本命令" class="headerlink" title="基本命令"></a>基本命令</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;</span><span class="bash"> show dbs		//查看mongodb的数据库</span></span><br><span class="line">local 0.000GB</span><br><span class="line">test 0.0000GB</span><br><span class="line"><span class="meta">&gt;</span><span class="bash"> use <span class="built_in">test</span> 		//选择数据库（如果没有就会创建一个数据库）并且变成在当前数据库</span></span><br><span class="line">switched to db test</span><br><span class="line"><span class="meta">&gt;</span><span class="bash">show tables	//查看数据库下的表</span></span><br><span class="line">users</span><br><span class="line"><span class="meta">&gt;</span><span class="bash">db.users.find()	//没有限定查询条件就会全部输出</span></span><br></pre></td></tr></table></figure>
+<h5 id="基本命令"><a href="#基本命令" class="headerlink" title="基本命令"></a>基本命令</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;</span> show dbs		//查看mongodb的数据库</span><br><span class="line">local 0.000GB</span><br><span class="line">test 0.0000GB</span><br><span class="line"><span class="meta">&gt;</span> use test 		//选择数据库（如果没有就会创建一个数据库）并且变成在当前数据库</span><br><span class="line">switched to db test</span><br><span class="line"><span class="meta">&gt;</span>show tables	//查看数据库下的表</span><br><span class="line">users</span><br><span class="line"><span class="meta">&gt;</span>db.users.find()	//没有限定查询条件就会全部输出</span><br></pre></td></tr></table></figure>
 
 <blockquote>
 <p>更多命令:<a href="https://www.jianshu.com/p/e34489d0c7c7" target="_blank" rel="noopener">mongodb基础命令</a></p>
@@ -682,8 +677,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/07/16/linux文件目录的学习/" rel="next" title="linux文件目录的学习">
-                <i class="fa fa-chevron-left"></i> linux文件目录的学习
+              <a href="/2019/07/16/React+redux+typescript/" rel="next" title="React+redux+ts">
+                <i class="fa fa-chevron-left"></i> React+redux+ts
               </a>
             
           </div>
@@ -691,10 +686,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/07/16/Vue的入门笔记/" rel="prev" title="Vue的入门笔记">
-                Vue的入门笔记 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -760,7 +751,9 @@
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
-              <p class="site-author-name" itemprop="name">John Doe</p>
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="菜菜鸡">
+            
+              <p class="site-author-name" itemprop="name">菜菜鸡</p>
               <p class="site-description motion-element" itemprop="description"></p>
           </div>
 
@@ -769,7 +762,7 @@
             
               <div class="site-state-item site-state-posts">
               
-                <a href="/archives/">
+                <a href="/archives">
               
                   <span class="site-state-item-count">10</span>
                   <span class="site-state-item-name">posts</span>
@@ -781,10 +774,10 @@
               
               
               <div class="site-state-item site-state-categories">
-                
+                <a href="/categories/index.html">
                   <span class="site-state-item-count">9</span>
                   <span class="site-state-item-name">categories</span>
-                
+                </a>
               </div>
             
 
@@ -803,6 +796,28 @@
 
           
 
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/good-idear" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="1359064950@qq.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.zhihu.com/people/guo-shi-wu-shuang-35-7/activities" target="_blank" title="知乎">
+                      
+                        <i class="fa fa-fw fa-globe"></i>知乎</a>
+                  </span>
+                
+            </div>
           
 
           
@@ -850,7 +865,7 @@
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
-  <span class="author" itemprop="copyrightHolder">John Doe</span>
+  <span class="author" itemprop="copyrightHolder">菜菜鸡</span>
 
   
 </div>
@@ -1038,5 +1053,8 @@
 
   
 
+
+  <!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/clicklove.js"></script>
 </body>
 </html>

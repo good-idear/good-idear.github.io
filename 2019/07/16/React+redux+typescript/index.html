@@ -10,8 +10,23 @@
   <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<script src="https://me.idealli.com/images/load.gif" data-src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+<link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css" rel="stylesheet">
 <meta name="theme-color" content="#222">
 
+<style>
+    .pace .pace-progress {
+        background: #1E92FB; /*进度条颜色*/
+        height: 3px;
+    }
+    .pace .pace-progress-inner {
+         box-shadow: 0 0 10px #1E92FB, 0 0 5px     #1E92FB; /*阴影颜色*/
+    }
+    .pace .pace-activity {
+        border-top-color: #1E92FB;    /*上边框颜色*/
+        border-left-color: #1E92FB;    /*左边框颜色*/
+    }
+</style>
 
 
 
@@ -210,26 +225,6 @@
           </a>
         </li>
       
-        
-        <li class="menu-item menu-item-archives">
-          <a href="/archives/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
-            
-            Archives
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-schedule">
-          <a href="/schedule/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-calendar"></i> <br>
-            
-            Schedule
-          </a>
-        </li>
-      
 
       
     </ul>
@@ -266,9 +261,9 @@
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/16/React+redux+typescript/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="John Doe">
+      <meta itemprop="name" content="菜菜鸡">
       <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="/images/avatar.jpg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -362,7 +357,7 @@
 <figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"name"</span>: <span class="string">"my-app2"</span>,</span><br><span class="line">  <span class="attr">"version"</span>: <span class="string">"0.1.0"</span>,</span><br><span class="line">  <span class="attr">"private"</span>: <span class="literal">true</span>,</span><br><span class="line">  <span class="attr">"dependencies"</span>: &#123;</span><br><span class="line">    <span class="attr">"@emotion/core"</span>: <span class="string">"^10.0.10"</span>,</span><br><span class="line">    <span class="attr">"@types/jest"</span>: <span class="string">"24.0.12"</span>,</span><br><span class="line">    <span class="attr">"@types/node"</span>: <span class="string">"12.0.0"</span>,</span><br><span class="line">    <span class="attr">"@types/react"</span>: <span class="string">"16.8.17"</span>,</span><br><span class="line">    <span class="attr">"@types/react-dom"</span>: <span class="string">"16.8.4"</span>,</span><br><span class="line">    <span class="attr">"@types/react-redux"</span>: <span class="string">"^7.0.9"</span>,</span><br><span class="line">    <span class="attr">"emotion"</span>: <span class="string">"^10.0.9"</span>,</span><br><span class="line">    <span class="attr">"react"</span>: <span class="string">"^16.8.6"</span>,</span><br><span class="line">    <span class="attr">"react-dom"</span>: <span class="string">"^16.8.6"</span>,</span><br><span class="line">    <span class="attr">"react-redux"</span>: <span class="string">"^7.0.3"</span>,</span><br><span class="line">    <span class="attr">"react-scripts"</span>: <span class="string">"3.0.1"</span>,</span><br><span class="line">    <span class="attr">"redux"</span>: <span class="string">"^4.0.1"</span>,</span><br><span class="line">    <span class="attr">"typescript"</span>: <span class="string">"3.4.5"</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">"scripts"</span>: &#123;</span><br><span class="line">    <span class="attr">"start"</span>: <span class="string">"react-scripts start"</span>,</span><br><span class="line">    <span class="attr">"build"</span>: <span class="string">"react-scripts build"</span>,</span><br><span class="line">    <span class="attr">"test"</span>: <span class="string">"react-scripts test"</span>,</span><br><span class="line">    <span class="attr">"eject"</span>: <span class="string">"react-scripts eject"</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">"eslintConfig"</span>: &#123;</span><br><span class="line">    <span class="attr">"extends"</span>: <span class="string">"react-app"</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">"browserslist"</span>: &#123;</span><br><span class="line">    <span class="attr">"production"</span>: [</span><br><span class="line">      <span class="string">"&gt;0.2%"</span>,</span><br><span class="line">      <span class="string">"not dead"</span>,</span><br><span class="line">      <span class="string">"not op_mini all"</span></span><br><span class="line">    ],</span><br><span class="line">    <span class="attr">"development"</span>: [</span><br><span class="line">      <span class="string">"last 1 chrome version"</span>,</span><br><span class="line">      <span class="string">"last 1 firefox version"</span>,</span><br><span class="line">      <span class="string">"last 1 safari version"</span></span><br><span class="line">    ]</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>菜鸟当然是使用脚手架咯！</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># 全局安装ts</span><br><span class="line">npm install -g typescript</span><br><span class="line"># 全局安装create-react-app</span><br><span class="line">npm install -g create-react-app</span><br><span class="line"># 创建项目</span><br><span class="line">create-react-app 项目名 --scripts-version=react-scripts-ts</span><br><span class="line"># 启动项目</span><br><span class="line">npm run start</span><br></pre></td></tr></table></figure>
+<figure class="highlight dsconfig"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 全局安装ts</span></span><br><span class="line"><span class="string">npm </span><span class="string">install </span>-g <span class="string">typescript</span></span><br><span class="line"><span class="string">#</span> 全局安装<span class="built_in">create-react-app</span></span><br><span class="line"><span class="built_in">npm</span> <span class="string">install </span>-g <span class="built_in">create-react-app</span></span><br><span class="line"><span class="built_in">#</span> 创建项目</span><br><span class="line"><span class="built_in">create-react-app</span> 项目名 <span class="built_in">--scripts-version=react-scripts-ts</span></span><br><span class="line"><span class="built_in">#</span> 启动项目</span><br><span class="line"><span class="string">npm </span><span class="string">run </span><span class="string">start</span></span><br></pre></td></tr></table></figure>
 
 <p>注意：</p>
 <ul>
@@ -502,6 +497,10 @@
 
           <div class="post-nav-prev post-nav-item">
             
+              <a href="/2019/07/16/Express的学习/" rel="prev" title="Express的学习">
+                Express的学习 <i class="fa fa-chevron-right"></i>
+              </a>
+            
           </div>
         </div>
       
@@ -566,7 +565,9 @@
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
-              <p class="site-author-name" itemprop="name">John Doe</p>
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="菜菜鸡">
+            
+              <p class="site-author-name" itemprop="name">菜菜鸡</p>
               <p class="site-description motion-element" itemprop="description"></p>
           </div>
 
@@ -575,7 +576,7 @@
             
               <div class="site-state-item site-state-posts">
               
-                <a href="/archives/">
+                <a href="/archives">
               
                   <span class="site-state-item-count">10</span>
                   <span class="site-state-item-name">posts</span>
@@ -587,10 +588,10 @@
               
               
               <div class="site-state-item site-state-categories">
-                
+                <a href="/categories/index.html">
                   <span class="site-state-item-count">9</span>
                   <span class="site-state-item-name">categories</span>
-                
+                </a>
               </div>
             
 
@@ -609,6 +610,28 @@
 
           
 
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/good-idear" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="1359064950@qq.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.zhihu.com/people/guo-shi-wu-shuang-35-7/activities" target="_blank" title="知乎">
+                      
+                        <i class="fa fa-fw fa-globe"></i>知乎</a>
+                  </span>
+                
+            </div>
           
 
           
@@ -656,7 +679,7 @@
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
-  <span class="author" itemprop="copyrightHolder">John Doe</span>
+  <span class="author" itemprop="copyrightHolder">菜菜鸡</span>
 
   
 </div>
@@ -844,5 +867,8 @@
 
   
 
+
+  <!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/clicklove.js"></script>
 </body>
 </html>
