@@ -1,0 +1,1038 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Express,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Express学习1.0 什么是模块化 文件作用域   该模块内的定义的变量只能调用当前模块的函数，其他模块有相同名字的变量也不能够调用 解决了模块命名冲突的问题   通信规则  加载 require   导出模块module.exports =add,add是一个方法，就能在其他模块直接使用方法。如果是exports.add=add，就要使用.add方法来使用函数，所以不推荐使用。  1var">
+<meta name="keywords" content="Express">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Express的学习">
+<meta property="og:url" content="http://yoursite.com/2019/07/16/Express的学习/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="Express学习1.0 什么是模块化 文件作用域   该模块内的定义的变量只能调用当前模块的函数，其他模块有相同名字的变量也不能够调用 解决了模块命名冲突的问题   通信规则  加载 require   导出模块module.exports =add,add是一个方法，就能在其他模块直接使用方法。如果是exports.add=add，就要使用.add方法来使用函数，所以不推荐使用。  1var">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="d:%5CTypora%5CExpress%E5%AD%A6%E4%B9%A0%5Cjson.png">
+<meta property="og:image" content="d:%5CTypora%5CExpress%E5%AD%A6%E4%B9%A0%5Cajax%E7%9A%84json.png">
+<meta property="og:updated_time" content="2019-07-16T02:04:05.145Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Express的学习">
+<meta name="twitter:description" content="Express学习1.0 什么是模块化 文件作用域   该模块内的定义的变量只能调用当前模块的函数，其他模块有相同名字的变量也不能够调用 解决了模块命名冲突的问题   通信规则  加载 require   导出模块module.exports =add,add是一个方法，就能在其他模块直接使用方法。如果是exports.add=add，就要使用.add方法来使用函数，所以不推荐使用。  1var">
+<meta name="twitter:image" content="d:%5CTypora%5CExpress%E5%AD%A6%E4%B9%A0%5Cjson.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '菜菜鸡'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/07/16/Express的学习/">
+
+
+
+
+
+  <title>Express的学习 | Hexo</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Hexo</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-schedule">
+          <a href="/schedule/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-calendar"></i> <br>
+            
+            Schedule
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/16/Express的学习/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Express的学习</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-07-16T10:00:15+08:00">
+                2019-07-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Express/" itemprop="url" rel="index">
+                    <span itemprop="name">Express</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="Express学习"><a href="#Express学习" class="headerlink" title="Express学习"></a>Express学习</h1><h4 id="1-0-什么是模块化"><a href="#1-0-什么是模块化" class="headerlink" title="1.0 什么是模块化"></a>1.0 什么是模块化</h4><ul>
+<li><p>文件作用域 </p>
+<ul>
+<li>该模块内的定义的变量只能调用当前模块的函数，其他模块有相同名字的变量也不能够调用</li>
+<li>解决了模块命名冲突的问题</li>
+</ul>
+</li>
+<li><p>通信规则</p>
+<ul>
+<li><p>加载 require </p>
+</li>
+<li><p>导出模块<code>module.exports =add</code>,add是一个方法，就能在其他模块直接使用方法。如果是<code>exports.add=add</code>，就要使用<code>.add</code>方法来使用函数，所以不推荐使用。</p>
+</li>
+<li><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> 自定义模块 = <span class="built_in">require</span>(<span class="string">'模块'</span>)来使用模块</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<ul>
+<li>导出模块内所有函数 :<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">module.exports = &#123;</span><br><span class="line">    var add = function add(x,y)&#123;</span><br><span class="line">        return x+y</span><br><span class="line">    &#125;</span><br><span class="line">    var sun = &apos;hello&apos;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h4 id="1-1-require-方法加载规则"><a href="#1-1-require-方法加载规则" class="headerlink" title="1.1. require 方法加载规则"></a>1.1. require 方法加载规则</h4><ul>
+<li><p>核心模块</p>
+<ul>
+<li>模块名</li>
+</ul>
+</li>
+<li><p>第3方模块</p>
+<ul>
+<li>模块名</li>
+</ul>
+</li>
+<li><p>用户自己定义</p>
+<ul>
+<li>路径</li>
+</ul>
+</li>
+<li><p>对于已经加载过的模块，不会重新加载，只是从缓存中拿到模块的加载对象，提高性能。</p>
+</li>
+<li><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">require</span>(<span class="string">'./foo.js'</span>)      这里的./或者../不能省略，但是后面的.js可以省略。</span><br><span class="line">fs.readFile(<span class="string">'foo.js'</span>)    在请求文件的相对路径中可以省略 ./</span><br><span class="line">fs.readFile(<span class="string">'/foo.js'</span>)   如果是 / 则是从所在文件的磁盘根目录中找</span><br></pre></td></tr></table></figure>
+
+<p>更多底层机制参考[《深入浅出node.js》][<a href="http://www.infoq.com/cn/master-nodejs]" target="_blank" rel="noopener">http://www.infoq.com/cn/master-nodejs]</a></p>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="2-0-package-json"><a href="#2-0-package-json" class="headerlink" title="2.0.package.json"></a>2.0.package.json</h4><ul>
+<li><p>这就是相当于项目的说明书，根据这个文件，只要<code>npm init</code>就能生成这个文件。这里面是生成项目所需的依赖包版本号之类的信息，然后如果缺失了node_module,就可以通过<code>npm install</code>命令重新下载第3方包。</p>
+</li>
+<li><p>下载第 3 方包通过<code>npm install art-template --save</code>命令，要有 <code>--save</code>,这样就会保存到node_module中的依赖。在<code>npm@5</code>之后的版本可以不用加<code>--save</code></p>
+</li>
+<li><p>npm 升级命令：<code>npm install --global npm</code></p>
+<blockquote>
+<p>npm int -y 可以跳过向导，快速生成</p>
+</blockquote>
+</li>
+<li><p>删除包</p>
+<ul>
+<li>删除的同时依赖信息也会删除</li>
+<li><code>npm uninstall art-template --save</code>删除命令</li>
+</ul>
+</li>
+</ul>
+<h4 id="3-0-Express"><a href="#3-0-Express" class="headerlink" title="3.0.Express"></a>3.0.Express</h4><p>这里使用<code>nodemon</code>来帮我们进行伪热刷新</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span>全局安装</span><br><span class="line">npm install --global nodemon</span><br></pre></td></tr></table></figure>
+
+<p>安装完毕之后使用：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">node app.js</span><br><span class="line"><span class="meta">#</span> 改为使用 nodemon</span><br><span class="line">nodemon app.js</span><br></pre></td></tr></table></figure>
+
+<h5 id="3-1-请求静态资源"><a href="#3-1-请求静态资源" class="headerlink" title="3.1.请求静态资源"></a>3.1.请求静态资源</h5><ul>
+<li><p>当以 /public 为第一个参数的时候，可以通过 get 请求直接去 ./public/ 目录里面找对应的文件，也可以外联式访问，比如css,js的样式</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">app.use(<span class="string">'/public/'</span>, express.static(<span class="string">'./public/'</span>))</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>当省略第一个参数的时候，则 get 请求需要省略 /public/</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">app.use(express.static(<span class="string">'public'</span>))</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>推荐使用:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> path = <span class="built_in">require</span>(<span class="string">'path'</span>)</span><br><span class="line"><span class="comment">//上面的功能都有</span></span><br><span class="line">app.use(<span class="string">'/public/'</span>,express.static(path.join(__dirname, <span class="string">'./public/'</span>)))</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h5 id="3-1-模板引擎"><a href="#3-1-模板引擎" class="headerlink" title="3.1.模板引擎"></a>3.1.模板引擎</h5><ul>
+<li><p>Express有个约定：把所有的视图像 ejs,html,art-template  都放在 views目录之下，所以默认去 views 里面找</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">res.render(<span class="string">'不要加views'</span>，&#123;渲染的变量参数&#125;)</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>res.render()引用模板，如果在views文件下之下的又一个文件夹(topic)，需要加上文件加路径res.render(‘topic/index.html’)</p>
+</blockquote>
+</li>
+</ul>
+<h5 id="3-1-1Path路径操作模块"><a href="#3-1-1Path路径操作模块" class="headerlink" title="3.1.1Path路径操作模块"></a>3.1.1Path路径操作模块</h5><ul>
+<li>path.basename<ul>
+<li>获取一个路径的文件名（默认包含扩展名）</li>
+</ul>
+</li>
+<li>path.dirname<ul>
+<li>获取一个路径的目录部分</li>
+</ul>
+</li>
+<li>path.extname<ul>
+<li>获取一个路径的扩展名部分</li>
+</ul>
+</li>
+<li>path.parse<ul>
+<li>把一个路径转化为对象</li>
+<li>就是上诉几种方法的集合</li>
+</ul>
+</li>
+</ul>
+<h5 id="3-2-Express-获取表单数据"><a href="#3-2-Express-获取表单数据" class="headerlink" title="3.2.Express 获取表单数据"></a>3.2.Express 获取表单数据</h5><ul>
+<li><p>获取 get 数据</p>
+<ul>
+<li>直接使用 <code>req.query</code> 就能获取，因为get请求直接把数据解析成字符串加在请求路径的后面，所以query 可以直接解析成json格式来使用</li>
+<li>在<code>input</code>的表单中需要有<code>name</code>属性，获取的对象name作为key,所填的值作为<code>value</code>.</li>
+</ul>
+</li>
+<li><p>获取post 数据</p>
+<ul>
+<li><p>使用中间件<code>body-parser</code>来获取，post 表单数据是在 form data 中，只能通过中间件来获取。</p>
+</li>
+<li><p>只要配置了<code>body-parser</code>就会自动在请求的属性上加入<code>body</code>属性，使用<code>req.body</code>来获取</p>
+</li>
+<li><p>在<code>input</code>的表单中需要有<code>name</code>属性，获取的对象name作为key,所填的值作为<code>value</code>.</p>
+</li>
+<li><p>配置：</p>
+</li>
+<li><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//这两句要放在 app.use(router)之前</span></span><br><span class="line">app.use(bodyParser.urlencoded(&#123; <span class="attr">extended</span>:<span class="literal">false</span> &#125;))</span><br><span class="line"></span><br><span class="line">app.use(bodyParser.json())</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><blockquote>
+<p>在登陆注册页面中使用 ajax 时的<strong>json方法</strong></p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> formData = $(<span class="keyword">this</span>).serialize()</span><br><span class="line">$.ajax(&#123;</span><br><span class="line">    url:<span class="string">'/register'</span>,</span><br><span class="line">    type:<span class="string">'post'</span>,</span><br><span class="line">    data:formData,</span><br><span class="line">    dataType:<span class="string">'json'</span>,<span class="comment">//这里设置的json，在后台响应数据时，不能直接res.status(200).send('ok'),因为规定了接收json数据格式，否则不会显示出来。</span></span><br><span class="line">    success:<span class="function"><span class="keyword">function</span> (<span class="params">data</span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(data)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>就在后台响应发送数据时改成：res.status(200).json({success:true})</p>
+</li>
+</ul>
+<h5 id="3-3-路由设计"><a href="#3-3-路由设计" class="headerlink" title="3.3 路由设计"></a>3.3 路由设计</h5><table>
+<thead>
+<tr>
+<th>请求方法</th>
+<th>请求路径</th>
+<th>get参数</th>
+<th align="center">post 参数</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>GET</td>
+<td>/students</td>
+<td></td>
+<td align="center"></td>
+<td>渲染首页</td>
+</tr>
+<tr>
+<td>GET</td>
+<td>/students/new</td>
+<td></td>
+<td align="center"></td>
+<td>渲染添加学生信息</td>
+</tr>
+<tr>
+<td>POST</td>
+<td>/students</td>
+<td></td>
+<td align="center">name,age,sex,hobbies</td>
+<td>处理添加学生信息</td>
+</tr>
+<tr>
+<td>GET</td>
+<td>/students/edit</td>
+<td>id</td>
+<td align="center"></td>
+<td>渲染</td>
+</tr>
+<tr>
+<td>POST</td>
+<td>/students/edit</td>
+<td></td>
+<td align="center">id,age,sex,hobbies,name</td>
+<td>处理</td>
+</tr>
+<tr>
+<td>GET</td>
+<td>/students/delete</td>
+<td>id</td>
+<td align="center"></td>
+<td>删除信息</td>
+</tr>
+</tbody></table>
+<h5 id="3-4-路由请求"><a href="#3-4-路由请求" class="headerlink" title="3.4 路由请求"></a>3.4 路由请求</h5><ul>
+<li>当发送 get/post 请求<strong>localhost:3000/students/edit?id=x</strong> 时，Express 会自动的向 <strong>localhost:3000/students/edit</strong> 发送数据，而不需要理会 <strong>?</strong> 之后的东西。</li>
+</ul>
+<h5 id="3-5-express-session-中间件"><a href="#3-5-express-session-中间件" class="headerlink" title="3.5 express-session 中间件"></a>3.5 express-session 中间件</h5><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">npm i express-session</span><br><span class="line"><span class="keyword">var</span> session = <span class="built_in">require</span>(<span class="string">'express-session'</span>)</span><br><span class="line">app.use(session(&#123;</span><br><span class="line">  secret: <span class="string">'wuxueqiang'</span>,<span class="comment">//自己设置加密字符串</span></span><br><span class="line">  resave: <span class="literal">false</span>,</span><br><span class="line">  saveUninitialized: <span class="literal">false</span> <span class="comment">//默认是 true ，表示无论是否使用 session 都会默认给一个 session 值</span></span><br><span class="line">&#125;))</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>设置与获取session</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">req.session.user = user<span class="comment">//添加 session 数据</span></span><br><span class="line">req.session.user	   <span class="comment">//获取</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>默认session 的数据是内存存储的，服务器一旦重启就会丢失，真正的生产环境要配置过的</p>
+</blockquote>
+<h5 id="3-6-用户头像上传-multer-中间件"><a href="#3-6-用户头像上传-multer-中间件" class="headerlink" title="3.6 用户头像上传 multer 中间件"></a>3.6 用户头像上传 multer 中间件</h5><ul>
+<li><code>javascript</code>代码部分</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> multer = <span class="built_in">require</span>(<span class="string">'multer'</span>)</span><br><span class="line"><span class="keyword">var</span> path = <span class="built_in">require</span>(<span class="string">'path'</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> dataImg = <span class="string">'public/images'</span> <span class="comment">// 头像所要存储的文件路径，是绝对路径，因为在app.js中开放了public文件夹，所以可以直接引用，images 文件夹会自动创建好</span></span><br><span class="line"><span class="keyword">var</span> storage = multer.diskStorage(&#123;</span><br><span class="line">	<span class="comment">// 如果你提供的 destination 是一个函数，你需要负责创建文件夹</span></span><br><span class="line">	destination: dataImg,</span><br><span class="line">	<span class="comment">// 给上传文件重命名，获取添加后缀名</span></span><br><span class="line">	filename: <span class="function">(<span class="params">req, file, cb</span>) =&gt;</span> &#123;</span><br><span class="line">		cb(<span class="literal">null</span>, file.originalname)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;)</span><br><span class="line"><span class="keyword">var</span> upload = multer(&#123;</span><br><span class="line">	storage: storage</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">//	设置里面上传头像</span></span><br><span class="line"><span class="comment">//	这里的upload.single('avatar'),avatar与html里表单的 name 值相对应</span></span><br><span class="line">router.post(<span class="string">'/upload'</span>, upload.single(<span class="string">'avatar'</span>),(req, res, next) =&gt; &#123;</span><br><span class="line">	<span class="comment">/*var file = req.file</span></span><br><span class="line"><span class="comment">	console.log(file);*/</span></span><br><span class="line">	<span class="comment">//console.log(req.file)	// 打印出来的是图片的各种信息</span></span><br><span class="line">	<span class="comment">/*console.log(req.session.user)*/</span></span><br><span class="line">	<span class="comment">//	还要把文件的路径更新到用户数据中，不然的话重新登录，头像还是没有改变，但是上传的头像却在文件中</span></span><br><span class="line">    <span class="keyword">var</span> avatarUser = req.session.user</span><br><span class="line">	avatarUser.avatar = req.file.path</span><br><span class="line">	</span><br><span class="line">	<span class="comment">/*res.send(&#123;ret_code:dataImg&#125;)*/</span></span><br><span class="line">	</span><br><span class="line">	User.updateOne(&#123;<span class="attr">email</span>:avatarUser.email&#125;, &#123;<span class="attr">$set</span>:&#123;<span class="attr">avatar</span>:avatarUser.avatar&#125;&#125;,(err, result) =&gt; &#123;</span><br><span class="line">		<span class="keyword">if</span> (err) &#123;</span><br><span class="line">			<span class="keyword">return</span> res.send(<span class="string">'服务器繁忙，请稍后重试！'</span>)</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span> &#123;</span><br><span class="line">			<span class="keyword">return</span> res.redirect(<span class="string">'/profile'</span>)</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;)</span><br><span class="line">    <span class="comment">//	更新session 信息</span></span><br><span class="line">    req.session.user = avatarUser</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><code>html</code>代码部分。需要注意的地方：<code>enctype=&quot;multipart/form-data&quot;</code>这段代码必填，否则 multer 不会解析</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">&lt;form id=<span class="string">"formAvatar"</span> enctype=<span class="string">"multipart/form-data"</span> action=<span class="string">"/upload"</span> method=<span class="string">"post"</span>&gt;</span><br><span class="line">					&lt;span&gt;头像设置&lt;<span class="regexp">/span&gt;&lt;br&gt;</span></span><br><span class="line"><span class="regexp">					&#123;&#123;if user&#125;&#125;</span></span><br><span class="line"><span class="regexp">					&lt;img src="&#123;&#123; user.avatar &#125;&#125;" style="width:200px;height: 200px;background-size: cover"&gt;</span></span><br><span class="line"><span class="regexp">					&lt;p&gt;&lt;/</span>p&gt;</span><br><span class="line">					&#123;&#123; <span class="keyword">else</span> &#125;&#125;</span><br><span class="line">					&lt;img src=<span class="string">"/public/githublogo.jpg"</span>&gt;</span><br><span class="line">					&lt;p&gt;&lt;/p&gt;</span><br><span class="line">					&#123;&#123; /<span class="keyword">if</span> &#125;&#125;</span><br><span class="line">					&lt;input type=<span class="string">"file"</span> name=<span class="string">"avatar"</span> value=<span class="string">"选择头像"</span> id=<span class="string">"imga"</span>&gt;</span><br><span class="line">					&lt;p&gt;&lt;/p&gt;</span><br><span class="line">					&lt;input type=<span class="string">"submit"</span> <span class="class"><span class="keyword">class</span></span>=<span class="string">"btn btn-primary"</span> value=<span class="string">"上传头像"</span>&gt;</span><br><span class="line">				&lt;<span class="regexp">/form&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="3-7-art-template-模板的使用（由服务端渲染）"><a href="#3-7-art-template-模板的使用（由服务端渲染）" class="headerlink" title="3.7 art-template 模板的使用（由服务端渲染）"></a>3.7 art-template 模板的使用（由服务端渲染）</h5><ul>
+<li><code>node.js</code>的路由方面的代码</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//	这里的数据请求，要先保存在本地变量里才行（request没有返回值，所以不要封装函数了）而且本里变量的声明为 app.locals.apiRequest = apiRequest,其它方式的声明无效（var apiRequest = []）</span></span><br><span class="line"><span class="keyword">var</span> apiRequest = []</span><br><span class="line">app.locals.apiRequest = apiRequest</span><br><span class="line"><span class="comment">//	render 直接开放了 views 文件夹，所以渲染只要直接引用里面的文件夹就行</span></span><br><span class="line">router.get(<span class="string">'/'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">req, res</span>) </span>&#123;</span><br><span class="line">	<span class="comment">/*console.log(req.session.user)*/</span></span><br><span class="line">	<span class="built_in">console</span>.log(<span class="string">'woshisb'</span>)</span><br><span class="line">	<span class="comment">//	动态渲染数据</span></span><br><span class="line">	request.get(<span class="string">'https://www.v2ex.com/api/topics/latest.json'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">error, response, body</span>) </span>&#123;</span><br><span class="line">		    <span class="keyword">if</span> (!error &amp;&amp; response.statusCode == <span class="number">200</span>) &#123;</span><br><span class="line">		        <span class="comment">//console.log(body)</span></span><br><span class="line">		        apiRequest = <span class="built_in">JSON</span>.parse(body); <span class="comment">// 输出请求到的body</span></span><br><span class="line">		</span><br><span class="line">		    &#125;</span><br><span class="line">		&#125;)</span><br><span class="line">	res.render(<span class="string">'_layouts/home.html'</span>, &#123;</span><br><span class="line">		user:req.session.user,</span><br><span class="line">		information: apiRequest</span><br><span class="line">	&#125;)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>前端的代码（数组遍历的使用要根据 json 的数据格式来）</li>
+</ul>
+<p><img src="D:%5CTypora%5CExpress%E5%AD%A6%E4%B9%A0%5Cjson.png" alt></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">//  只需要在外围进行一次遍历就行（看数据的数组位置）</span><br><span class="line">&#123;&#123; each information as value &#125;&#125;</span><br><span class="line">				<span class="tag">&lt;<span class="name">tr</span>&gt;</span></span><br><span class="line">					<span class="tag">&lt;<span class="name">td</span> <span class="attr">width</span>=<span class="string">"48"</span> <span class="attr">valign</span>=<span class="string">"top"</span> <span class="attr">align</span>=<span class="string">"center"</span>&gt;</span>	 </span><br><span class="line">						<span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"&#123;&#123; value.member.url &#125;&#125;"</span>&gt;</span></span><br><span class="line">							<span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">"&#123;&#123; value.member.avatar_normal &#125;&#125;"</span> <span class="attr">class</span>=<span class="string">"avatar"</span> <span class="attr">border</span>=<span class="string">"0"</span> <span class="attr">align</span>=<span class="string">"defualt"</span> <span class="attr">style</span>=<span class="string">"margin-top: 10px;background-size: cover;"</span>&gt;</span></span><br><span class="line">						<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line">					<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">				<span class="tag">&lt;/<span class="name">tr</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">each</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="3-8-art-template-由客户端渲染"><a href="#3-8-art-template-由客户端渲染" class="headerlink" title="3.8 art-template 由客户端渲染"></a>3.8 art-template 由客户端渲染</h5><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">title</span>&gt;</span>模板<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"app"</span>&gt;</span>	</span><br><span class="line">	<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"art-template.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">id</span>=<span class="string">"test"</span> <span class="attr">type</span>=<span class="string">"text/html"</span>&gt;</span></span><br><span class="line"><span class="xml">	<span class="tag">&lt;<span class="name">h1</span>&gt;</span>&#123;&#123; title &#125;&#125;<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span></span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="javascript">    <span class="comment">//	渲染的数据一定要是 JSON 的数据格式，否则渲染不出来</span></span></span><br><span class="line"><span class="javascript">	<span class="keyword">var</span> data = &#123;</span></span><br><span class="line"><span class="javascript">		title:<span class="string">'基本粒子'</span></span></span><br><span class="line">	&#125;</span><br><span class="line"><span class="javascript">	<span class="keyword">var</span> html = template(<span class="string">'test'</span>, data)</span></span><br><span class="line"><span class="javascript">	<span class="built_in">document</span>.getElementById(<span class="string">'app'</span>).innerHTML = html</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="3-9-由客户端渲染（ajax请求数据）"><a href="#3-9-由客户端渲染（ajax请求数据）" class="headerlink" title="3.9 由客户端渲染（ajax请求数据）"></a>3.9 由客户端渲染（ajax请求数据）</h5><p><img src="D:%5CTypora%5CExpress%E5%AD%A6%E4%B9%A0%5Cajax%E7%9A%84json.png" alt></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">id</span>=<span class="string">"test"</span> <span class="attr">type</span>=<span class="string">"text/html"</span>&gt;</span>	</span><br><span class="line"><span class="javascript">	&#123;&#123;code&#125;&#125;                        <span class="comment">//拿到的应该是第一个大括号里的东西  200</span></span></span><br><span class="line"><span class="javascript">	&#123;&#123;each result value index&#125;&#125;   	<span class="comment">//  循环的应该是第一个大括号里的数组	</span></span></span><br><span class="line"><span class="xml">	<span class="tag">&lt;<span class="name">h1</span>&gt;</span>&#123;&#123;value.name&#125;&#125;<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span></span><br><span class="line"><span class="javascript">	&#123;&#123;each value.content value index&#125;&#125;  <span class="comment">//这里的数组是 result 数组之下的</span></span></span><br><span class="line"><span class="xml">	<span class="tag">&lt;<span class="name">h2</span>&gt;</span>&#123;&#123;value.author&#125;&#125;<span class="tag">&lt;/<span class="name">h2</span>&gt;</span></span></span><br><span class="line">	&#123;&#123;/each&#125;&#125;</span><br><span class="line">	&#123;&#123;/each&#125;&#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="javascript">	<span class="built_in">window</span>.onload = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span></span><br><span class="line"><span class="javascript">		$.ajax(&#123;</span></span><br><span class="line"><span class="javascript">			url:<span class="string">'http://api.apiopen.top/musicRankings'</span>,</span></span><br><span class="line"><span class="javascript">			type:<span class="string">'GET'</span>,</span></span><br><span class="line"><span class="javascript">			dataType:<span class="string">'json'</span>,</span></span><br><span class="line"><span class="javascript">			success:<span class="function"><span class="keyword">function</span> (<span class="params">msg</span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">				$(<span class="string">'#app'</span>).html(template(<span class="string">"test"</span>,msg));	</span></span><br><span class="line">			&#125;</span><br><span class="line">		&#125;)</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="4-0-回调函数"><a href="#4-0-回调函数" class="headerlink" title="4.0 回调函数"></a>4.0 回调函数</h4><ul>
+<li>node 的核心就是回调函数，通过回调函数来提高性能。</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//暴露出函数</span></span><br><span class="line"><span class="comment">//这里的参数 callback 就是下面的回调函数 </span></span><br><span class="line">exports.find = <span class="function"><span class="keyword">function</span> (<span class="params">callback</span>) </span>&#123;</span><br><span class="line">	fs.readFile(dbPath, <span class="function"><span class="keyword">function</span> (<span class="params">err, data</span>) </span>&#123;</span><br><span class="line">		<span class="keyword">if</span> (err) &#123;</span><br><span class="line">			<span class="comment">//需要让 err 被调用，就要使用回调函数 </span></span><br><span class="line">            <span class="comment">//如果直接 return err 就是在返回在readFile的函数中，因为当前的函数作用域在readFile中</span></span><br><span class="line">            <span class="keyword">return</span> callback(err)</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="comment">//在这里传参数，没有错误则传第一个参数为空</span></span><br><span class="line">        callback(<span class="literal">null</span>, <span class="built_in">JSON</span>.parse(data).students)</span><br><span class="line">	&#125;)</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//students 就是代表的学生信息</span></span><br><span class="line">Student.find(<span class="function"><span class="keyword">function</span> (<span class="params">err, students</span>) </span>&#123;</span><br><span class="line">		<span class="keyword">if</span> (err) &#123;</span><br><span class="line">			<span class="keyword">return</span> res.status(<span class="number">500</span>).send(<span class="string">'Server error'</span>)</span><br><span class="line">		&#125;</span><br><span class="line">		res.render(<span class="string">'index.html'</span>, &#123;</span><br><span class="line">			fruits:[</span><br><span class="line">				<span class="string">'苹果'</span>,</span><br><span class="line">				<span class="string">'香蕉'</span>,</span><br><span class="line">				<span class="string">'橘子'</span></span><br><span class="line">			],</span><br><span class="line">			students:students</span><br><span class="line">		&#125;)</span><br><span class="line">	&#125;)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>例子</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">add</span>(<span class="params">x, y</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'1'</span>)</span><br><span class="line">    setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">var</span> sum = x + y</span><br><span class="line">        <span class="keyword">return</span> sum</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'2'</span>)</span><br><span class="line">    &#125;,<span class="number">1000</span>)</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'3'</span>)</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(add(<span class="number">10</span>,<span class="number">30</span>)) <span class="comment">// undefined</span></span><br><span class="line"><span class="comment">//1</span></span><br><span class="line"><span class="comment">//3</span></span><br><span class="line"><span class="comment">//undefined</span></span><br><span class="line"><span class="comment">//2</span></span><br><span class="line"><span class="comment">// 因为 js 的机制就是遇见定时器的话，会优先执行后面的代码，然后再调用定时器里的函数</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>解决办法：</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">add</span>(<span class="params">x, y, callback</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'1'</span>)</span><br><span class="line">    setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">var</span> sum = x + y</span><br><span class="line">        callback(sum)</span><br><span class="line">    &#125;,<span class="number">1000</span>)</span><br><span class="line">&#125;</span><br><span class="line">add(<span class="number">10</span>, <span class="number">20</span>, <span class="function"><span class="keyword">function</span>(<span class="params">sum</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(sum)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h4 id="5-0-MongoDB"><a href="#5-0-MongoDB" class="headerlink" title="5.0 MongoDB"></a>5.0 MongoDB</h4><ul>
+<li><p>下载之后需要配置环境变量</p>
+</li>
+<li><p>启动数据库</p>
+</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">net start mongodb</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>连接数据库</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mongo  这样就行</span><br></pre></td></tr></table></figure>
+
+<h5 id="基本命令"><a href="#基本命令" class="headerlink" title="基本命令"></a>基本命令</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;</span> show dbs		//查看mongodb的数据库</span><br><span class="line">local 0.000GB</span><br><span class="line">test 0.0000GB</span><br><span class="line"><span class="meta">&gt;</span> use test 		//选择数据库（如果没有就会创建一个数据库）并且变成在当前数据库</span><br><span class="line">switched to db test</span><br><span class="line"><span class="meta">&gt;</span>show tables	//查看数据库下的表</span><br><span class="line">users</span><br><span class="line"><span class="meta">&gt;</span>db.users.find()	//没有限定查询条件就会全部输出</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>更多命令:<a href="https://www.jianshu.com/p/e34489d0c7c7" target="_blank" rel="noopener">mongodb基础命令</a></p>
+<p>Mongodb基本使用：<a href="https://www.cnblogs.com/TankMa/archive/2011/06/08/2074947.html" target="_blank" rel="noopener">命令</a></p>
+</blockquote>
+<h4 id="5-1-node-js-操作mongodb的常用操作"><a href="#5-1-node-js-操作mongodb的常用操作" class="headerlink" title="5.1 node.js 操作mongodb的常用操作"></a>5.1 node.js 操作mongodb的常用操作</h4><ul>
+<li>添加数据</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">router.post(<span class="string">'/profile'</span>,(req, res) =&gt; &#123;</span><br><span class="line">    <span class="keyword">var</span> data = [&#123;<span class="string">"naem"</span>:<span class="string">"wuxueqiang"</span>,<span class="string">"age"</span>:<span class="number">21</span>&#125;,&#123;<span class="string">"naem"</span>:<span class="string">'lihua'</span>,<span class="string">"age"</span>:<span class="number">22</span>&#125;]</span><br><span class="line">    User.insert(data,(err, data) =&gt; &#123;</span><br><span class="line">        <span class="keyword">if</span> (err) &#123;</span><br><span class="line">            <span class="keyword">return</span> res.status(<span class="number">500</span>).json(&#123;   <span class="comment">// 这里的json数据与前台的页面相结合，前台ajax的success可以接受到这里返回的数据</span></span><br><span class="line">                err_code:<span class="number">1</span>,</span><br><span class="line">                message:<span class="string">'数据提交错误！'</span></span><br><span class="line">            &#125;) </span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> res.status(<span class="number">200</span>).json(&#123;</span><br><span class="line">                err_code:<span class="number">0</span>,</span><br><span class="line">                message:<span class="string">'数据提交成功'</span></span><br><span class="line">            &#125;)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>查询操作</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line">router.post(<span class="string">'/register'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">req, res</span>) </span>&#123;</span><br><span class="line">	<span class="comment">//1.0 获取表单提交的数据</span></span><br><span class="line">	<span class="comment">//2.0 操作数据库</span></span><br><span class="line">	<span class="comment">//	   判断用户是否已存在</span></span><br><span class="line">	<span class="comment">//	   如果已存在 不能注册</span></span><br><span class="line">	<span class="comment">//	   如果不存在，注册新用户</span></span><br><span class="line">	<span class="comment">//3.0 发送响应</span></span><br><span class="line">	<span class="comment">/*console.log(req.body)*/</span></span><br><span class="line">	<span class="keyword">var</span> body = req.body</span><br><span class="line">	body.password = md5(md5(body.password))</span><br><span class="line">	<span class="comment">/*console.log(body.password)*/</span></span><br><span class="line">	User.findOne(&#123;</span><br><span class="line">		$or:[</span><br><span class="line">			&#123;</span><br><span class="line">				email:body.email</span><br><span class="line">			&#125;,</span><br><span class="line">			&#123;</span><br><span class="line">				nickname:body.nickname</span><br><span class="line">			&#125;</span><br><span class="line">		]</span><br><span class="line">		</span><br><span class="line">	&#125;, <span class="function"><span class="keyword">function</span> (<span class="params">err, data</span>) </span>&#123;</span><br><span class="line">		<span class="keyword">if</span> (err) &#123;</span><br><span class="line">			<span class="keyword">return</span> res.status(<span class="number">500</span>).json(&#123;</span><br><span class="line">				err_code:<span class="number">500</span>,</span><br><span class="line">				message:<span class="string">'服务端错误'</span></span><br><span class="line">			&#125;)</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span> (data) &#123;</span><br><span class="line">			<span class="keyword">return</span> res.status(<span class="number">200</span>).json(&#123;</span><br><span class="line">				err_code:<span class="number">1</span>,</span><br><span class="line">				message:<span class="string">'邮箱或者昵称已存在'</span></span><br><span class="line">			&#125;)</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="comment">//	保存数据</span></span><br><span class="line">		<span class="keyword">new</span> User(body).save(<span class="function"><span class="keyword">function</span>(<span class="params">err, user</span>) </span>&#123;</span><br><span class="line">			<span class="keyword">if</span> (err) &#123;</span><br><span class="line">				<span class="keyword">return</span> res.status(<span class="number">500</span>).json(&#123;</span><br><span class="line">					err_code:<span class="number">500</span>,</span><br><span class="line">					message:<span class="string">'服务端错误'</span></span><br><span class="line">				&#125;)</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="comment">// 	注册成功，使用 Session 记录用户的登录状态</span></span><br><span class="line">			req.session.user = user;</span><br><span class="line">			</span><br><span class="line">			res.status(<span class="number">200</span>).json(&#123;</span><br><span class="line">				err_code:<span class="number">0</span>,</span><br><span class="line">				message:<span class="string">'ok'</span></span><br><span class="line">			&#125;)</span><br><span class="line">		&#125;)</span><br><span class="line">		</span><br><span class="line">	&#125;)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>删除操作</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> whereStr = &#123;<span class="string">"name"</span>: <span class="string">'wuxueqiang'</span>&#125;</span><br><span class="line">User.remove(whereStr, (err, result) =&gt; &#123;</span><br><span class="line">    <span class="keyword">if</span> (err) &#123;</span><br><span class="line">       <span class="built_in">console</span>.log(<span class="string">'Error:'</span>+ err)</span><br><span class="line">        retrun;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>更新数据</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//	里面填写需要更新的数据</span></span><br><span class="line">User.updateOne(&#123;<span class="attr">email</span>: userEmail&#125;, &#123;<span class="attr">$set</span>:&#123;<span class="attr">nickname</span>: newUser.nickname, <span class="attr">bio</span>: newUser.bio, <span class="attr">gender</span>: newUser.gender&#125;&#125;, (err, result) =&gt; &#123;</span><br><span class="line">		<span class="keyword">if</span> (err) &#123;</span><br><span class="line">			<span class="keyword">return</span> res.status(<span class="number">500</span>).json(&#123;</span><br><span class="line">				err_code:<span class="number">1</span>,</span><br><span class="line">				message:<span class="string">'数据提交错误'</span></span><br><span class="line">			&#125;)</span><br><span class="line">		&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">			<span class="keyword">return</span> res.status(<span class="number">200</span>).json(&#123;</span><br><span class="line">				err_code:<span class="number">200</span>,</span><br><span class="line">				message:<span class="string">'数据提交成功！'</span></span><br><span class="line">			&#125;)</span><br><span class="line"></span><br><span class="line">		&#125;</span><br><span class="line">	&#125;)</span><br><span class="line">	<span class="comment">//	更新完用户数据，session也同时更新</span></span><br><span class="line">	req.session.user = newUser</span><br></pre></td></tr></table></figure>
+
+<h4 id="6-0-Promise"><a href="#6-0-Promise" class="headerlink" title="6.0 Promise"></a>6.0 Promise</h4><ul>
+<li>封装一个<code>readFile</code></li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">var</span> fs = <span class="built_in">require</span>(<span class="string">'fs'</span>)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">preadFile</span>(<span class="params">filePath</span>) </span>&#123;</span><br><span class="line">	<span class="comment">//resolve 表示已完成，reject 表示出错并停止运行</span></span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="keyword">function</span> (<span class="params">resolve, reject</span>) </span>&#123;</span><br><span class="line">		fs.readFile(filePath, <span class="string">'utf8'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">err, data</span>) </span>&#123;</span><br><span class="line">			<span class="keyword">if</span> (err) &#123;</span><br><span class="line">				reject(err)</span><br><span class="line">			&#125;<span class="keyword">else</span> &#123;</span><br><span class="line">				resolve(data)</span><br><span class="line">			&#125;</span><br><span class="line"></span><br><span class="line">		&#125;)</span><br><span class="line">	&#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">preadFile(<span class="string">'./data/a.txt'</span>)</span><br><span class="line">	<span class="comment">//这里的data 为preadFile 的返回数据</span></span><br><span class="line">    .then(<span class="function"><span class="keyword">function</span> (<span class="params">data</span>) </span>&#123;</span><br><span class="line">		<span class="built_in">console</span>.log(data)</span><br><span class="line">		<span class="comment">//这里返回的数据被下面的 function 接收</span></span><br><span class="line">    	<span class="keyword">return</span> preadFile(<span class="string">'./data/b.txt'</span>)</span><br><span class="line">	&#125;)</span><br><span class="line">	.then(<span class="function"><span class="keyword">function</span> (<span class="params">data</span>) </span>&#123;</span><br><span class="line">		<span class="built_in">console</span>.log(data)</span><br><span class="line">		<span class="keyword">return</span> preadFile(<span class="string">'./data/c.txt'</span>)</span><br><span class="line">	&#125;)</span><br><span class="line">	.then(<span class="function"><span class="keyword">function</span> (<span class="params">data</span>) </span>&#123;</span><br><span class="line">		<span class="built_in">console</span>.log(data)</span><br><span class="line">	&#125;)</span><br></pre></td></tr></table></figure>
+
+<h4 id="6-1-Events-模块"><a href="#6-1-Events-模块" class="headerlink" title="6.1 Events 模块"></a>6.1 Events 模块</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> events = <span class="built_in">require</span>(<span class="string">'events'</span>)</span><br><span class="line"><span class="keyword">var</span> EventEmitter = <span class="keyword">new</span> events.EventEmiter()</span><br><span class="line"><span class="comment">//  绑定to_parent 的事件</span></span><br><span class="line">EventEmitter.on(<span class="string">'to_parent'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">data</span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(data)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="comment">//	处理 to_parent 事件</span></span><br><span class="line">    EventEmitter.emit(<span class="string">'to_parent'</span>,<span class="string">'发送的数据'</span>)</span><br><span class="line">&#125;,<span class="number">2000</span>)</span><br><span class="line">events.emiter.listenerCount(eventName) <span class="comment">//  返回指定事件的监听器数量</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>如果你在同一个事件上添加的监听器超过10个就会引发警告，需要<code>setMaxListeners(n)</code>来提高默认限制数量</p>
+</blockquote>
+<ul>
+<li>大多数时候我们不会直接使用 EventEmitter，而是在对象中继承它。包括 fs、net、 http 在内的，只要是支持事件响应的核心模块都是 EventEmitter 的子类。</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Express/" rel="tag"># Express</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/07/16/React+redux+typescript/" rel="next" title="Express的学习">
+                <i class="fa fa-chevron-left"></i> Express的学习
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">John Doe</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">categories</span>
+                
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">tags</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Express学习"><span class="nav-number">1.</span> <span class="nav-text">Express学习</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-0-什么是模块化"><span class="nav-number">1.0.0.1.</span> <span class="nav-text">1.0 什么是模块化</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-1-require-方法加载规则"><span class="nav-number">1.0.0.2.</span> <span class="nav-text">1.1. require 方法加载规则</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-0-package-json"><span class="nav-number">1.0.0.3.</span> <span class="nav-text">2.0.package.json</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-0-Express"><span class="nav-number">1.0.0.4.</span> <span class="nav-text">3.0.Express</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#3-1-请求静态资源"><span class="nav-number">1.0.0.4.1.</span> <span class="nav-text">3.1.请求静态资源</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-1-模板引擎"><span class="nav-number">1.0.0.4.2.</span> <span class="nav-text">3.1.模板引擎</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-1-1Path路径操作模块"><span class="nav-number">1.0.0.4.3.</span> <span class="nav-text">3.1.1Path路径操作模块</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-2-Express-获取表单数据"><span class="nav-number">1.0.0.4.4.</span> <span class="nav-text">3.2.Express 获取表单数据</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-3-路由设计"><span class="nav-number">1.0.0.4.5.</span> <span class="nav-text">3.3 路由设计</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-4-路由请求"><span class="nav-number">1.0.0.4.6.</span> <span class="nav-text">3.4 路由请求</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-5-express-session-中间件"><span class="nav-number">1.0.0.4.7.</span> <span class="nav-text">3.5 express-session 中间件</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-6-用户头像上传-multer-中间件"><span class="nav-number">1.0.0.4.8.</span> <span class="nav-text">3.6 用户头像上传 multer 中间件</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-7-art-template-模板的使用（由服务端渲染）"><span class="nav-number">1.0.0.4.9.</span> <span class="nav-text">3.7 art-template 模板的使用（由服务端渲染）</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-8-art-template-由客户端渲染"><span class="nav-number">1.0.0.4.10.</span> <span class="nav-text">3.8 art-template 由客户端渲染</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-9-由客户端渲染（ajax请求数据）"><span class="nav-number">1.0.0.4.11.</span> <span class="nav-text">3.9 由客户端渲染（ajax请求数据）</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-0-回调函数"><span class="nav-number">1.0.0.5.</span> <span class="nav-text">4.0 回调函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-0-MongoDB"><span class="nav-number">1.0.0.6.</span> <span class="nav-text">5.0 MongoDB</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#基本命令"><span class="nav-number">1.0.0.6.1.</span> <span class="nav-text">基本命令</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-1-node-js-操作mongodb的常用操作"><span class="nav-number">1.0.0.7.</span> <span class="nav-text">5.1 node.js 操作mongodb的常用操作</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-0-Promise"><span class="nav-number">1.0.0.8.</span> <span class="nav-text">6.0 Promise</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-1-Events-模块"><span class="nav-number">1.0.0.9.</span> <span class="nav-text">6.1 Events 模块</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

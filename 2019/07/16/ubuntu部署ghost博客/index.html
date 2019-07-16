@@ -1,0 +1,811 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="博客,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="前言：想要建立ghost博客的应该都有了自己服务器，才到这一步的。所以还需要一些准备工作：  mysql的安装版本要小于8.0的，一般都是5.7 node的安装可以通过nvm安装（最好不要在root用户下安装，因为ghost的安装不能使用root用户，但是如果你是在root用户安装的node的话，在非root用户的权限下是不能使用node的，而且还需要重新安装。这里涉及到了linux的用户权限和其">
+<meta name="keywords" content="博客">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Express的学习">
+<meta property="og:url" content="http://yoursite.com/2019/07/16/ubuntu部署ghost博客/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="前言：想要建立ghost博客的应该都有了自己服务器，才到这一步的。所以还需要一些准备工作：  mysql的安装版本要小于8.0的，一般都是5.7 node的安装可以通过nvm安装（最好不要在root用户下安装，因为ghost的安装不能使用root用户，但是如果你是在root用户安装的node的话，在非root用户的权限下是不能使用node的，而且还需要重新安装。这里涉及到了linux的用户权限和其">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="d:%5CTypora%5Clinux%E5%AD%A6%E4%B9%A0%5Cghost.jpg">
+<meta property="og:updated_time" content="2019-07-16T02:05:31.324Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Express的学习">
+<meta name="twitter:description" content="前言：想要建立ghost博客的应该都有了自己服务器，才到这一步的。所以还需要一些准备工作：  mysql的安装版本要小于8.0的，一般都是5.7 node的安装可以通过nvm安装（最好不要在root用户下安装，因为ghost的安装不能使用root用户，但是如果你是在root用户安装的node的话，在非root用户的权限下是不能使用node的，而且还需要重新安装。这里涉及到了linux的用户权限和其">
+<meta name="twitter:image" content="d:%5CTypora%5Clinux%E5%AD%A6%E4%B9%A0%5Cghost.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '菜菜鸡'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/07/16/ubuntu部署ghost博客/">
+
+
+
+
+
+  <title>Express的学习 | Hexo</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Hexo</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-schedule">
+          <a href="/schedule/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-calendar"></i> <br>
+            
+            Schedule
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/16/ubuntu部署ghost博客/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Express的学习</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-07-16T10:00:15+08:00">
+                2019-07-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/博客/" itemprop="url" rel="index">
+                    <span itemprop="name">博客</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><strong>前言</strong>：想要建立ghost博客的应该都有了自己服务器，才到这一步的。所以还需要一些准备工作：</p>
+<ul>
+<li><code>mysql</code>的安装版本要小于8.0的，一般都是5.7</li>
+<li><code>node</code>的安装可以通过<code>nvm</code>安装（最好不要在root用户下安装，因为ghost的安装不能使用<code>root</code>用户，但是如果你是在root用户安装的node的话，在非root用户的权限下是不能使用node的，而且还需要重新安装。这里涉及到了linux的用户权限和其文件系统的原理，就不扯了。）所以我们最好新建一个用户来进行操作，一般都不使用root用户。</li>
+<li><em>mysql和node的安装可以参考我的上一篇博客《部署nodejs项目到ubuntu云服务器上》，有所提及，希望对各位小伙伴有帮助</em></li>
+</ul>
+<h2 id="安装Nginx"><a href="#安装Nginx" class="headerlink" title="安装Nginx"></a>安装Nginx</h2><ul>
+<li>安装nginx需要在root用户下</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install nginx</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>调整防火墙</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo ufw allow <span class="string">'Nginx Full'</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>验证Nginx是否正常工作</li>
+</ul>
+<p>只要能通过外网访问你的<code>IP</code>地址就行，应该会显示nginx的信息。</p>
+<ul>
+<li>参考博客：<a href="https://juejin.im/post/59eaf94151882521f2435c43" target="_blank" rel="noopener">https://juejin.im/post/59eaf94151882521f2435c43</a></li>
+</ul>
+<h2 id="安装ghost"><a href="#安装ghost" class="headerlink" title="安装ghost"></a>安装ghost</h2><ul>
+<li>安装<code>ghost-cli</code></li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo npm install ghost-cli@latest -g</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>创建文件夹</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">sudo mkdir -p /var/www/ghost</span><br><span class="line"></span><br><span class="line"><span class="comment"># 将文件夹赋予用户 username  就是你的用户名字</span></span><br><span class="line">sudo chown username:userame /var/www/ghost</span><br><span class="line"></span><br><span class="line"><span class="comment"># 开放权限</span></span><br><span class="line">sudo chmod 775 /var/www/ghost</span><br><span class="line"></span><br><span class="line"><span class="comment"># Then navigate into it</span></span><br><span class="line"><span class="built_in">cd</span> /var/www/ghost</span><br><span class="line"></span><br><span class="line">ghost install</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>开始安装的时候会有一些设置：</li>
+</ul>
+<p><img src="D:%5CTypora%5Clinux%E5%AD%A6%E4%B9%A0%5Cghost.jpg" alt></p>
+<p><code>url</code>的地址就是你的<code>IP</code>地址,还会有<code>nginx</code>的设置之类，看你自己的需求吧</p>
+<ul>
+<li>官网有<a href="https://docs.ghost.org/install/ubuntu/" target="_blank" rel="noopener">详细配置</a></li>
+</ul>
+<h2 id="最后的配置"><a href="#最后的配置" class="headerlink" title="最后的配置"></a>最后的配置</h2><p>在进行到这一步后，你会发现还是不能通过<code>IP+:2068</code>访问，接下来就是解决办法</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /var/www/ghost</span><br><span class="line"><span class="comment"># ls命令后你会看到一个配置文件 config.production.json</span></span><br><span class="line">ls</span><br><span class="line"><span class="comment"># 修改配置文件</span></span><br><span class="line">sudo vim config.production.json</span><br><span class="line"><span class="comment"># 配置内容</span></span><br><span class="line"><span class="string">"server"</span>: &#123;</span><br><span class="line">    <span class="string">"port"</span>: 2368,</span><br><span class="line">    <span class="string">"host"</span>: <span class="string">"0.0.0.0"</span>  <span class="comment"># 将这里的127.0.0.1改成0.0.0.0</span></span><br><span class="line">  &#125;,</span><br><span class="line"><span class="comment"># 配置完成保存退出，然后通过IP+:+2368端口就可以访问了</span></span><br></pre></td></tr></table></figure>
+
+<p>那么Nginx是什么作用呢？它提供一个映射端口的功能。比如你访问101.132.106.94就可以映射到101.132.106.94：2368</p>
+<ul>
+<li>修改Nginx的配置文件</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 配置文件应该在/etc/nginx目录下</span></span><br><span class="line"><span class="built_in">cd</span> /etc/nginx</span><br><span class="line">sudo vim nginx.conf</span><br><span class="line"><span class="comment"># 先在第一行的user www.data; 改成 user root;</span></span><br><span class="line"><span class="comment"># 然后在http模块里面进行配置</span></span><br><span class="line">http &#123;</span><br><span class="line">        <span class="comment">#ghost端口设置</span></span><br><span class="line">        server &#123;</span><br><span class="line">                listen 80;</span><br><span class="line">                server_name 101.132.104.94;</span><br><span class="line"></span><br><span class="line">        location / &#123;</span><br><span class="line">                proxy_set_header   X-Real-IP <span class="variable">$remote_addr</span>;</span><br><span class="line">                proxy_set_header   Host  <span class="variable">$http_host</span>;</span><br><span class="line">                proxy_pass http://127.0.0.1:2368;</span><br><span class="line">                &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        ...</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment"># 重新启动</span></span><br><span class="line">sudo service nginx restart</span><br></pre></td></tr></table></figure>
+
+<p>我们并不需要进行持久化操作，ghost好像默认持久化的。然后就可以通过IP地址访问了</p>
+<h2 id="最最后面的配置"><a href="#最最后面的配置" class="headerlink" title="最最后面的配置"></a>最最后面的配置</h2><blockquote>
+<p>如果你想要邀请别人进入你的团队的话，需要在阿里云的控制台开启<code>smtp</code>服务</p>
+</blockquote>
+<ul>
+<li>开启<code>SMTP</code>服务</li>
+</ul>
+<p>参考：<a href="https://ninghao.net/video/3634" target="_blank" rel="noopener">https://ninghao.net/video/3634</a></p>
+<ul>
+<li>修改<code>ghost</code>的配置文件，修改程序根目录的<code>config.production.json</code>文件</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"mail"</span>: &#123;</span><br><span class="line">    <span class="string">"transport"</span>: <span class="string">"SMTP"</span>,</span><br><span class="line">    <span class="string">"from"</span>: <span class="string">"'xiaowu' &lt;123456@qq.com&gt;"</span>,</span><br><span class="line">    <span class="string">"options"</span>: &#123;</span><br><span class="line">        <span class="string">"host"</span>: <span class="string">"smtp.qq.com"</span>,</span><br><span class="line">        <span class="string">"secureConnection"</span>: <span class="literal">true</span>,</span><br><span class="line">        <span class="string">"port"</span>: <span class="number">465</span>,</span><br><span class="line">        <span class="string">"auth"</span>: &#123;</span><br><span class="line">            <span class="string">"user"</span>: <span class="string">"123456@qq.com"</span>,</span><br><span class="line">            <span class="string">"pass"</span>: <span class="string">"qq邮箱授权码"</span> <span class="comment">// 需要获取授权码</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>获取qq邮箱授权码</li>
+</ul>
+<p>参考：<a href="https://blog.csdn.net/github_2011/article/details/82664560" target="_blank" rel="noopener">https://blog.csdn.net/github_2011/article/details/82664560</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/博客/" rel="tag"># 博客</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/07/16/webpack配置和React/" rel="next" title="Express的学习">
+                <i class="fa fa-chevron-left"></i> Express的学习
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/07/16/Vue的入门笔记/" rel="prev" title="Express的学习">
+                Express的学习 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">John Doe</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">categories</span>
+                
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">tags</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#安装Nginx"><span class="nav-number">1.</span> <span class="nav-text">安装Nginx</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装ghost"><span class="nav-number">2.</span> <span class="nav-text">安装ghost</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#最后的配置"><span class="nav-number">3.</span> <span class="nav-text">最后的配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#最最后面的配置"><span class="nav-number">4.</span> <span class="nav-text">最最后面的配置</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

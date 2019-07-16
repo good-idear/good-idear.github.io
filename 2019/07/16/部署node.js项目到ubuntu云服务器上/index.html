@@ -1,0 +1,832 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="nodejs,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="部署node.js项目到Ubuntu云服务器上1.0 购买完阿里云服务器之后的步骤 配置安全组   阿里云服务器如果不配置安全组，那么在项目部署到服务器之后不能通过外网（即浏览器）访问，也不能够使用xshell或者putty远程连接服务器，所以目前的配置安全组是为了可以远程连接服务器   配置安全组规则  端口‘22’为可以进行linux(ssh)访问，端口‘21’进行sftp访问，端口3389为">
+<meta name="keywords" content="nodejs">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Express的学习">
+<meta property="og:url" content="http://yoursite.com/2019/07/16/部署node.js项目到ubuntu云服务器上/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="部署node.js项目到Ubuntu云服务器上1.0 购买完阿里云服务器之后的步骤 配置安全组   阿里云服务器如果不配置安全组，那么在项目部署到服务器之后不能通过外网（即浏览器）访问，也不能够使用xshell或者putty远程连接服务器，所以目前的配置安全组是为了可以远程连接服务器   配置安全组规则  端口‘22’为可以进行linux(ssh)访问，端口‘21’进行sftp访问，端口3389为">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-07-16T02:06:12.601Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Express的学习">
+<meta name="twitter:description" content="部署node.js项目到Ubuntu云服务器上1.0 购买完阿里云服务器之后的步骤 配置安全组   阿里云服务器如果不配置安全组，那么在项目部署到服务器之后不能通过外网（即浏览器）访问，也不能够使用xshell或者putty远程连接服务器，所以目前的配置安全组是为了可以远程连接服务器   配置安全组规则  端口‘22’为可以进行linux(ssh)访问，端口‘21’进行sftp访问，端口3389为">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '菜菜鸡'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/07/16/部署node.js项目到ubuntu云服务器上/">
+
+
+
+
+
+  <title>Express的学习 | Hexo</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Hexo</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-schedule">
+          <a href="/schedule/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-calendar"></i> <br>
+            
+            Schedule
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/16/部署node.js项目到ubuntu云服务器上/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Express的学习</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-07-16T10:00:15+08:00">
+                2019-07-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/nodejs/" itemprop="url" rel="index">
+                    <span itemprop="name">nodejs</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="部署node-js项目到Ubuntu云服务器上"><a href="#部署node-js项目到Ubuntu云服务器上" class="headerlink" title="部署node.js项目到Ubuntu云服务器上"></a>部署node.js项目到Ubuntu云服务器上</h1><h2 id="1-0-购买完阿里云服务器之后的步骤"><a href="#1-0-购买完阿里云服务器之后的步骤" class="headerlink" title="1.0 购买完阿里云服务器之后的步骤"></a>1.0 购买完阿里云服务器之后的步骤</h2><ul>
+<li>配置安全组</li>
+</ul>
+<blockquote>
+<p>阿里云服务器如果不配置安全组，那么在项目部署到服务器之后不能通过外网（即浏览器）访问，也不能够使用xshell或者putty远程连接服务器，所以目前的配置安全组是为了可以远程连接服务器</p>
+</blockquote>
+<ul>
+<li>配置安全组规则</li>
+</ul>
+<p>端口‘22’为可以进行linux(ssh)访问，端口‘21’进行sftp访问，端口3389为windows访问，假设允许公网上所有IP地址访问您的网站，则需要开放‘80’，‘443’，‘自定义端口’</p>
+<h2 id="2-0-使用xshell连接远程服务器"><a href="#2-0-使用xshell连接远程服务器" class="headerlink" title="2.0 使用xshell连接远程服务器"></a>2.0 使用xshell连接远程服务器</h2><ul>
+<li>下载xshell</li>
+<li>进入阿里云官网，点击创建密钥（现在都需要密钥连接），选择自动新建密钥，将生成的密钥对文件下载下来，创建之后，绑定密钥对，重启服务器。</li>
+<li>进入xshell ，新建一个连接，输入服务器的外网IP，点击用户身份验证，方法选择密钥，将密钥对（即之前在阿里云下载下来的密钥）导入xshell中,期间输入的密码不是云服务器的密码或者远程连接密码。点击连接就可以了。</li>
+</ul>
+<h2 id="3-0-在服务器上安装node-js环境"><a href="#3-0-在服务器上安装node-js环境" class="headerlink" title="3.0 在服务器上安装node.js环境"></a>3.0 在服务器上安装node.js环境</h2><p>我之前在ubuntu下的root用户安装过nvm，但是创建了新用户之后，新用户就没有node的使用权，显示没有安装nvm,所以这次需要在新用户下安装nvm，那么在root权限下也可以调用nvm</p>
+<ul>
+<li>先安装 nvm</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">//这里使用的nvm全局安装，会安装在/usr/local/nvm下</span><br><span class="line">//github地址：https://github.com/xtuple/nvm</span><br><span class="line">wget -qO- https://raw.githubusercontent.com/xtuple/nvm/master/install.sh | sudo bash</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>安装npm(就是这里的坑)</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ sudo nvm install v8.12.0	//只是暂时性的使用这个版本，断开连接之后会显示没有node版本</span><br><span class="line">$ sudo nvm <span class="built_in">alias</span> default v8.12.0  //默认使用该版本，则断开连接依旧显示有 node 版本存在</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>使用淘宝镜像</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">npm config <span class="built_in">set</span> registry https://registry.npm.taobao.org</span><br><span class="line">//配置后可通过下面方式来验证是否成功</span><br><span class="line">npm config get registry</span><br><span class="line">//使之可以使用cnpm命令</span><br><span class="line">npm install -g cnpm --registry=https://registry.npm.taobao.org</span><br></pre></td></tr></table></figure>
+
+<h2 id="4-0-在云服务器上安装mongodb"><a href="#4-0-在云服务器上安装mongodb" class="headerlink" title="4.0 在云服务器上安装mongodb"></a>4.0 在云服务器上安装mongodb</h2><ul>
+<li>先下载压缩包，不论在服务器上还是在自己电脑上下载，记得下载服务器版本的mongodb,放在根目录下的 /usr/local 里面</li>
+<li>使用命令解压</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">tar zxvf mongodb-linux-x86_64-3.4.5.tgz			//解压会多出一个mongodb-linux-x86_64-3.4.5文件</span><br><span class="line">mv mongodb-linux-x86_64-3.4.5 mongodb 		//将这个文件重命名为mongodb</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>配置环境变量。将 mongodb的bin目录添加到系统环境的PATH中，修改 /etc/profile文件，这样所有的用户都能使用到</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo vi /etc/profile</span><br><span class="line">//在打开的文件里面加一句环境变量</span><br><span class="line"><span class="built_in">export</span> PATH=<span class="variable">$PATH</span>:/usr/<span class="built_in">local</span>/mongodb/bin		//保存退出</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>编辑mongodb的配置文件mongod.conf</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 创建并编辑 mongod.conf，然后保存</span></span><br><span class="line">sudo vi /etc/mongod.conf</span><br><span class="line"></span><br><span class="line"><span class="comment"># --- 内容是 ---</span></span><br><span class="line"><span class="comment"># 详细记录输出 </span></span><br><span class="line">verbose = <span class="literal">true</span> </span><br><span class="line"><span class="comment"># 指定服务端口号,默认端口27017 </span></span><br><span class="line">port = 27017 </span><br><span class="line"><span class="comment"># 指定MongoDB日志文件,注意是指定文件不是目录 </span></span><br><span class="line">logpath = /var/<span class="built_in">log</span>/mongodb/logs/mongodb.log </span><br><span class="line"><span class="comment"># 使用追加的方式写日志 </span></span><br><span class="line">logappend = <span class="literal">true</span> </span><br><span class="line"><span class="comment"># 指定数据库路径 </span></span><br><span class="line">dbpath = /data/db/ </span><br><span class="line"><span class="comment">#设置每个数据库将被保存在一个单独的目录 </span></span><br><span class="line">directoryperdb = <span class="literal">true</span> </span><br><span class="line"><span class="comment"># 启用验证 </span></span><br><span class="line">auth = <span class="literal">false</span> </span><br><span class="line"><span class="comment">#以守护进程的方式运行MongoDB,创建服务器进程,fork 参数代表使mongodb随服务器一直运行，但是在这里似乎没有什么作用</span></span><br><span class="line">fork = <span class="literal">true</span> </span><br><span class="line"><span class="comment">#安静输出 </span></span><br><span class="line">quiet = <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>设置数据库的日志和存储路径</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">创建保存数据文件的数据库目录</span><br><span class="line">mkdir -p /data/db/</span><br><span class="line">创建日志目录和日志文件</span><br><span class="line">mkdir -p /var/<span class="built_in">log</span>/mongodb/logs/</span><br><span class="line">touch /var/<span class="built_in">log</span>/mongodb/logs/mongodb.log   // touch创建的可编辑文件，mkdir 创建的是文件夹</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>如果到了这里没有问题的话，可以使用命令连接数据库</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mongod		//连接数据库，类似于windows 的 net start mongodb</span><br><span class="line">mongo		//新开一个连接，启动数据库，可以进行数据操作</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>如果上面的都没错，那么就可以设置数据库为一直连接状态</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$./mongod --fork --dbpath &lt;数据库存储的绝对路径&gt; --syslog</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>这里需要进入mongodb的文件下，即当初重命名的文件里面，在/usr/local/mongodb/bin里面使用命令</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo ./mongod --fork --dbpath /data/db --syslog		//这样就可以在后台一直运行</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>杀死 mongodb 进程，即可关闭 mongodb 服务：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">kill</span> -15 PID</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>大佬的教程：<a href="https://www.linuxidc.com/Linux/2016-06/132675.htm" target="_blank" rel="noopener">https://www.linuxidc.com/Linux/2016-06/132675.htm</a></p>
+</li>
+</ul>
+<h2 id="5-0-在云服务器上安装mysql"><a href="#5-0-在云服务器上安装mysql" class="headerlink" title="5.0 在云服务器上安装mysql"></a>5.0 在云服务器上安装mysql</h2><ul>
+<li>更新系统 <code>sudo apt-get update</code></li>
+<li>安装mysql-server</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install mysql-server  //在这其中会要求输入密码，自己设置，在输入框中输完按回车，记住。进入mysql也需要密码</span><br><span class="line">sudo apt-get isntall mysql-client </span><br><span class="line">sudo apt-get install libmysqlclient-dev</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>使用如下命令查询是否安装成功：<code>sudo netstat -tap | grep mysql</code>,出现mysql 就成功了</li>
+<li>登录 mysql <code>mysql -uroot -p123456</code>,这里的<code>123456</code>是之前设置的密码。</li>
+<li>退出 <code>exit</code>命令</li>
+</ul>
+<h2 id="6-0-使用pm2进行持久化运行项目"><a href="#6-0-使用pm2进行持久化运行项目" class="headerlink" title="6.0 使用pm2进行持久化运行项目"></a>6.0 使用pm2进行持久化运行项目</h2><ul>
+<li>在启动代码之前需要将监听端口在安全组规则里面设置，可以是’80’,也可以是自定义的端口（5000），但是都需要在安全组规则里面配置所监听的端口。</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">npm install -g pm2</span><br><span class="line">pm2 start app.js		//就可以持久运行项目</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/nodejs/" rel="tag"># nodejs</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/07/16/win10下使用nvm/" rel="next" title="Express的学习">
+                <i class="fa fa-chevron-left"></i> Express的学习
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/07/16/使用git上传代码到github/" rel="prev" title="Express的学习">
+                Express的学习 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">John Doe</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">categories</span>
+                
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">tags</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#部署node-js项目到Ubuntu云服务器上"><span class="nav-number">1.</span> <span class="nav-text">部署node.js项目到Ubuntu云服务器上</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-0-购买完阿里云服务器之后的步骤"><span class="nav-number">1.1.</span> <span class="nav-text">1.0 购买完阿里云服务器之后的步骤</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-0-使用xshell连接远程服务器"><span class="nav-number">1.2.</span> <span class="nav-text">2.0 使用xshell连接远程服务器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-0-在服务器上安装node-js环境"><span class="nav-number">1.3.</span> <span class="nav-text">3.0 在服务器上安装node.js环境</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-0-在云服务器上安装mongodb"><span class="nav-number">1.4.</span> <span class="nav-text">4.0 在云服务器上安装mongodb</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-0-在云服务器上安装mysql"><span class="nav-number">1.5.</span> <span class="nav-text">5.0 在云服务器上安装mysql</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-0-使用pm2进行持久化运行项目"><span class="nav-number">1.6.</span> <span class="nav-text">6.0 使用pm2进行持久化运行项目</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

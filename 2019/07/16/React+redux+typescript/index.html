@@ -1,0 +1,852 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="React,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="React+redux+ts的代办事项这次也是模仿大佬的项目，大致上的东西差不多，主要是为了练习一下react,ts,redux,因为之前一致对数据流概念不太清楚，又接触到了typescript，所以就入坑了。大佬项目地址： [https://github.com/jackluson/todolist--redux-hook-react]:  而且在网上有些类似项目太难了，对新手不够友好，所以我就">
+<meta name="keywords" content="React">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Express的学习">
+<meta property="og:url" content="http://yoursite.com/2019/07/16/React+redux+typescript/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="React+redux+ts的代办事项这次也是模仿大佬的项目，大致上的东西差不多，主要是为了练习一下react,ts,redux,因为之前一致对数据流概念不太清楚，又接触到了typescript，所以就入坑了。大佬项目地址： [https://github.com/jackluson/todolist--redux-hook-react]:  而且在网上有些类似项目太难了，对新手不够友好，所以我就">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-07-16T02:08:26.294Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Express的学习">
+<meta name="twitter:description" content="React+redux+ts的代办事项这次也是模仿大佬的项目，大致上的东西差不多，主要是为了练习一下react,ts,redux,因为之前一致对数据流概念不太清楚，又接触到了typescript，所以就入坑了。大佬项目地址： [https://github.com/jackluson/todolist--redux-hook-react]:  而且在网上有些类似项目太难了，对新手不够友好，所以我就">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '菜菜鸡'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/07/16/React+redux+typescript/">
+
+
+
+
+
+  <title>Express的学习 | Hexo</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Hexo</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-schedule">
+          <a href="/schedule/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-calendar"></i> <br>
+            
+            Schedule
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/16/React+redux+typescript/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Express的学习</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-07-16T10:00:15+08:00">
+                2019-07-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/React/" itemprop="url" rel="index">
+                    <span itemprop="name">React</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="React-redux-ts的代办事项"><a href="#React-redux-ts的代办事项" class="headerlink" title="React+redux+ts的代办事项"></a>React+redux+ts的代办事项</h1><p><strong>这次也是模仿大佬的项目，大致上的东西差不多，主要是为了练习一下react,ts,redux,因为之前一致对数据流概念不太清楚，又接触到了typescript，所以就入坑了。大佬项目地址：</strong></p>
+<p>[<a href="https://github.com/jackluson/todolist--redux-hook-react]" target="_blank" rel="noopener">https://github.com/jackluson/todolist--redux-hook-react]</a>: </p>
+<p>而且在网上有些类似项目太难了，对新手不够友好，所以我就尝试写了一下，也可以看作是对大佬项目的注释。</p>
+<blockquote>
+<p>读这篇文章需要对<code>typescript</code>的声明和约束懂一些，<code>react</code>和<code>redux</code>都了解，不然步子太大也很难理解。</p>
+</blockquote>
+<h2 id="1-创建项目"><a href="#1-创建项目" class="headerlink" title="1. 创建项目"></a>1. 创建项目</h2><p><code>./packahe.json</code>,这是项目的包的版本，读者直接下载我的配置文件直接安装也行，raect版本是16+的</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"name"</span>: <span class="string">"my-app2"</span>,</span><br><span class="line">  <span class="attr">"version"</span>: <span class="string">"0.1.0"</span>,</span><br><span class="line">  <span class="attr">"private"</span>: <span class="literal">true</span>,</span><br><span class="line">  <span class="attr">"dependencies"</span>: &#123;</span><br><span class="line">    <span class="attr">"@emotion/core"</span>: <span class="string">"^10.0.10"</span>,</span><br><span class="line">    <span class="attr">"@types/jest"</span>: <span class="string">"24.0.12"</span>,</span><br><span class="line">    <span class="attr">"@types/node"</span>: <span class="string">"12.0.0"</span>,</span><br><span class="line">    <span class="attr">"@types/react"</span>: <span class="string">"16.8.17"</span>,</span><br><span class="line">    <span class="attr">"@types/react-dom"</span>: <span class="string">"16.8.4"</span>,</span><br><span class="line">    <span class="attr">"@types/react-redux"</span>: <span class="string">"^7.0.9"</span>,</span><br><span class="line">    <span class="attr">"emotion"</span>: <span class="string">"^10.0.9"</span>,</span><br><span class="line">    <span class="attr">"react"</span>: <span class="string">"^16.8.6"</span>,</span><br><span class="line">    <span class="attr">"react-dom"</span>: <span class="string">"^16.8.6"</span>,</span><br><span class="line">    <span class="attr">"react-redux"</span>: <span class="string">"^7.0.3"</span>,</span><br><span class="line">    <span class="attr">"react-scripts"</span>: <span class="string">"3.0.1"</span>,</span><br><span class="line">    <span class="attr">"redux"</span>: <span class="string">"^4.0.1"</span>,</span><br><span class="line">    <span class="attr">"typescript"</span>: <span class="string">"3.4.5"</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">"scripts"</span>: &#123;</span><br><span class="line">    <span class="attr">"start"</span>: <span class="string">"react-scripts start"</span>,</span><br><span class="line">    <span class="attr">"build"</span>: <span class="string">"react-scripts build"</span>,</span><br><span class="line">    <span class="attr">"test"</span>: <span class="string">"react-scripts test"</span>,</span><br><span class="line">    <span class="attr">"eject"</span>: <span class="string">"react-scripts eject"</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">"eslintConfig"</span>: &#123;</span><br><span class="line">    <span class="attr">"extends"</span>: <span class="string">"react-app"</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">"browserslist"</span>: &#123;</span><br><span class="line">    <span class="attr">"production"</span>: [</span><br><span class="line">      <span class="string">"&gt;0.2%"</span>,</span><br><span class="line">      <span class="string">"not dead"</span>,</span><br><span class="line">      <span class="string">"not op_mini all"</span></span><br><span class="line">    ],</span><br><span class="line">    <span class="attr">"development"</span>: [</span><br><span class="line">      <span class="string">"last 1 chrome version"</span>,</span><br><span class="line">      <span class="string">"last 1 firefox version"</span>,</span><br><span class="line">      <span class="string">"last 1 safari version"</span></span><br><span class="line">    ]</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>菜鸟当然是使用脚手架咯！</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># 全局安装ts</span><br><span class="line">npm install -g typescript</span><br><span class="line"># 全局安装create-react-app</span><br><span class="line">npm install -g create-react-app</span><br><span class="line"># 创建项目</span><br><span class="line">create-react-app 项目名 --scripts-version=react-scripts-ts</span><br><span class="line"># 启动项目</span><br><span class="line">npm run start</span><br></pre></td></tr></table></figure>
+
+<p>注意：</p>
+<ul>
+<li>tsconfig.json包含了工程里TypeScript特定的选项。</li>
+<li>tslint.json保存了要使用的代码检查器的设置，TSLint。</li>
+<li>package.json包含了依赖，还有一些命令的快捷方式，如测试命令，预览命令和发布应用的命令。</li>
+<li>public包含了静态资源如HTML页面或图片。除了index.html文件外，其它的文件都可以删除。</li>
+<li>src包含了TypeScript和CSS源码。index.tsx是强制使用的入口文件。</li>
+</ul>
+<blockquote>
+<p>安装全局的命令包我推荐使用<code>npm</code>，然后之后的安装其它包就使用<code>yarn</code>,<code>yarn</code> 下载包的速度更快。只要学习一下yarn的命令就行了。</p>
+</blockquote>
+<h2 id="2-主要说明"><a href="#2-主要说明" class="headerlink" title="2. 主要说明"></a>2. 主要说明</h2><h3 id="2-1-使用redux-tools"><a href="#2-1-使用redux-tools" class="headerlink" title="2.1 使用redux-tools"></a>2.1 使用<code>redux-tools</code></h3><blockquote>
+<p>需要先在浏览器上安装相应的react插件<code>Redux DevTools</code>,才有效</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">// 原来会报错：window上不存在属性__REDUX_DEVTOOLS_EXTENSION__，</span><br><span class="line">// 所以就全局声明一个变量</span><br><span class="line">declare global &#123;</span><br><span class="line">    interface Window &#123;</span><br><span class="line">        __REDUX_DEVTOOLS_EXTENSION__:any</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION__ || compose;</span><br><span class="line">// 这是根 state 的约束</span><br><span class="line">export interface IRootState &#123;</span><br><span class="line">    demo: Storestate</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">const store = createStore&lt;any, any, any,any&gt;(reducer, composeEnhancers())</span><br><span class="line"></span><br><span class="line">ReactDOM.render(</span><br><span class="line">    &lt;Provider store=&#123;store&#125;&gt;</span><br><span class="line">       &lt;App/&gt; </span><br><span class="line">    &lt;/Provider&gt;</span><br><span class="line">    , </span><br><span class="line">    document.getElementById(&apos;root&apos;) as HTMLElement);</span><br><span class="line"></span><br><span class="line">serviceWorker.unregister();</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-2-使用redux"><a href="#2-2-使用redux" class="headerlink" title="2.2 使用redux"></a>2.2 使用<code>redux</code></h3><ul>
+<li>使用<code>mapStateToProps</code>,是把<code>state</code>的数据当成<code>props</code>注入到相应组件中</li>
+<li>使用<code>mapDispatchToProps</code>是把<code>dispatch</code>当成<code>props</code>注入组件中,可以通过<code>this.props.actionTodo</code>来调用该函数，进而触发<code>根store</code>的更新</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">// 引入state的类型  第二个参数可以为null</span><br><span class="line">const mapStateToProps = (state: Storestate, ownProps: listProps) =&gt; &#123;</span><br><span class="line">  let data = &#123;</span><br><span class="line">    todo:state.todos || [],</span><br><span class="line">    done:state.done || [],</span><br><span class="line">    undo:state.undo || [],</span><br><span class="line">    lastUpdated: state.lastUpdated</span><br><span class="line">  &#125;</span><br><span class="line">  //console.log(data)</span><br><span class="line">    return&#123;</span><br><span class="line">      data:data</span><br><span class="line">    &#125; </span><br><span class="line">&#125;</span><br><span class="line">// dispath的类型为Dispatch,需要引入类型 import &#123; Dispatch &#125; from &apos;redux&apos;在头部</span><br><span class="line">const mapDispatchToProps = (dispatch: Dispatch, ownProps: listProps) =&gt; &#123;</span><br><span class="line">    return &#123;</span><br><span class="line">        // 可以通过this.props.actionTodo来调用该函数，进而触发根store的更新</span><br><span class="line">        actionTodo: (obj:Action1) =&gt; &#123;</span><br><span class="line">            dispatch(obj)</span><br><span class="line">        &#125;,</span><br><span class="line">        action2Todo: (obj:Action1) =&gt; &#123;</span><br><span class="line">            dispatch(obj)</span><br><span class="line">        &#125;,</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">// 如果只需要一个函数，另一个直接为null</span><br><span class="line">//export default connect(null, mapDispatchToProps)(TodoItem)</span><br><span class="line">export default connect(mapStateToProps,mapDispatchToProps)(TodoItem)</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-3-action-ts"><a href="#2-3-action-ts" class="headerlink" title="2.3 action.ts"></a>2.3 <code>action.ts</code></h3><blockquote>
+<p>是用来规范函数的作用，以及传参给该函数进行调用。</p>
+</blockquote>
+<ul>
+<li>传统写法</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * action 类型</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> ADD_TODO = <span class="string">'ADD_TODO'</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> TOGGLE_TODO = <span class="string">'TOGGLE_TODO'</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> SET_VISIBILITY_FILTER = <span class="string">'SET_VISIBILITY_FILTER'</span></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * action 创建函数</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">addTodo</span>(<span class="params">text</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> &#123; <span class="attr">type</span>: ADD_TODO, text &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">toggleTodo</span>(<span class="params">index</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> &#123; <span class="attr">type</span>: TOGGLE_TODO, index &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">setVisibilityFilter</span>(<span class="params">filter</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> &#123; <span class="attr">type</span>: SET_VISIBILITY_FILTER, filter &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>骚操作</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">// 当使用固定值时，是可以当作类型的，所以才这样混写</span><br><span class="line">export type Action = </span><br><span class="line">    &#123;</span><br><span class="line">        type: &quot;add todo&quot;;       // 增加待办事项</span><br><span class="line">        todo: string;</span><br><span class="line">    &#125; | &#123;</span><br><span class="line">        type: &quot;done todo&quot;;      // 已完成的待办事项</span><br><span class="line">        index: number;</span><br><span class="line">    &#125; | &#123;</span><br><span class="line">        type: &quot;cancel todo&quot;;    // 取消待办事项</span><br><span class="line">        index: number;</span><br><span class="line">    &#125; | &#123;</span><br><span class="line">        type: &quot;withdraw todo&quot;;</span><br><span class="line">        index: number;</span><br><span class="line">    &#125; | &#123;</span><br><span class="line">        type: &quot;delete todo&quot;;    // 删除事项</span><br><span class="line">        index: number;</span><br><span class="line">    &#125; | &#123;</span><br><span class="line">        type: &quot;restore todo&quot;;</span><br><span class="line">        index: number;</span><br><span class="line">    &#125;;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>但是如果只是这样写的话，会报错：</p>
+<p>不能将类型“string”分配给类型“”add todo” | “done todo” | “cancel todo” | “withdraw todo” | “delete todo” | “restore todo”</p>
+<p>我的不知道为什么会报错，大佬就不会。</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">//这里的Action1本来应该是Action，但是会报上面的错，</span><br><span class="line">//所以需要在action.ts添加类型。</span><br><span class="line">interface doListProps extends listProps &#123;</span><br><span class="line">    index: number;</span><br><span class="line">    actionTodo:(obj:Action1)=&gt;void; </span><br><span class="line">    action2Todo:(obj:Action1)=&gt;void;</span><br><span class="line">    //data: any;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>完整的<code>action.ts</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">//这里有类型就ok了</span><br><span class="line">export interface Action1&#123;</span><br><span class="line">    type: string;</span><br><span class="line">    todo?:string;</span><br><span class="line">    index?:number;</span><br><span class="line">&#125;</span><br><span class="line">// 确定action的接口模式</span><br><span class="line">export type Action = </span><br><span class="line">    &#123;</span><br><span class="line">        type: &quot;add todo&quot;;       // 增加待办事项</span><br><span class="line">        todo: string;</span><br><span class="line">    &#125; | &#123;</span><br><span class="line">        type: &quot;done todo&quot;;      // 已完成的待办事项</span><br><span class="line">        index: number;</span><br><span class="line">    &#125; | &#123;</span><br><span class="line">        type: &quot;cancel todo&quot;;    // 取消待办事项</span><br><span class="line">        index: number;</span><br><span class="line">    &#125; | &#123;</span><br><span class="line">        type: &quot;withdraw todo&quot;;</span><br><span class="line">        index: number;</span><br><span class="line">    &#125; | &#123;</span><br><span class="line">        type: &quot;delete todo&quot;;    // 删除事项</span><br><span class="line">        index: number;</span><br><span class="line">    &#125; | &#123;</span><br><span class="line">        type: &quot;restore todo&quot;;</span><br><span class="line">        index: number;</span><br><span class="line">    &#125;;</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-3-type-ts"><a href="#2-3-type-ts" class="headerlink" title="2.3 type.ts"></a>2.3 <code>type.ts</code></h3><blockquote>
+<p>用来确定根store的类型，或者全局变量的类型</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">// 完成的状态</span><br><span class="line">export interface doneState &#123;</span><br><span class="line">    content: string;</span><br><span class="line">    date: string;</span><br><span class="line">&#125;</span><br><span class="line">// 这里的类型需要在index.tsx中使用</span><br><span class="line">export interface Storestate &#123;</span><br><span class="line">    lastUpdated: number;</span><br><span class="line">    todos: string[];    // 代办事项的数据</span><br><span class="line">    done: doneState[];  // 已完成的数据</span><br><span class="line">    undo: string[];     // 取消的事项</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-4-reducer-ts"><a href="#2-4-reducer-ts" class="headerlink" title="2.4 reducer.ts"></a>2.4 <code>reducer.ts</code></h3><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; Storestate, doneState &#125; <span class="keyword">from</span> <span class="string">'./types'</span></span><br><span class="line"><span class="keyword">import</span> &#123; Action &#125; <span class="keyword">from</span> <span class="string">'./actions'</span></span><br><span class="line"><span class="keyword">import</span> &#123; todoUtils &#125; <span class="keyword">from</span> <span class="string">'../utils/index'</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 获取当天的日期</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> getDate = <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> date = <span class="keyword">new</span> <span class="built_in">Date</span>()</span><br><span class="line">    <span class="keyword">const</span> mouth = date.getMonth() + <span class="number">1</span> &lt; <span class="number">10</span> ? <span class="string">"0"</span> + (date.getMonth() + <span class="number">1</span>) : date.getMonth() + <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">const</span> day = date.getDate() &lt; <span class="number">10</span> ? <span class="string">"0"</span> + date.getDate() : date.getDate()</span><br><span class="line">    <span class="keyword">return</span> date.getFullYear() + <span class="string">'-'</span> + mouth + <span class="string">'-'</span> + day;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 这里的state的需要一个初始值，下面代码中的 setStoreItem 需要 localStorage中的 todos</span></span><br><span class="line"><span class="keyword">const</span> initState: Storestate = &#123;</span><br><span class="line">    lastUpdated: todoUtils.getStoreItem(<span class="string">"lastUpdated"</span>) || <span class="number">0</span>,</span><br><span class="line">    todos: todoUtils.getStoreItem(<span class="string">"todos"</span>) || [],</span><br><span class="line">    done: todoUtils.getStoreItem(<span class="string">"done"</span>) || [],</span><br><span class="line">    undo:todoUtils.getStoreItem(<span class="string">"undo"</span>) || []</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> reducer = <span class="function">(<span class="params">state = initState, action: Action</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">switch</span> (action.type) &#123;</span><br><span class="line">        <span class="keyword">case</span> <span class="string">"add todo"</span>:</span><br><span class="line">            todoUtils.setStoreItem(<span class="string">"todos"</span>, state.todos.concat(action.todo))</span><br><span class="line">            <span class="keyword">return</span> &#123;</span><br><span class="line">                ...state,</span><br><span class="line">                lastUpdated: <span class="built_in">Date</span>.now(),</span><br><span class="line">                todos: state.todos.concat(action.todo)</span><br><span class="line">            &#125;</span><br><span class="line">        <span class="keyword">case</span> <span class="string">"done todo"</span>: &#123;</span><br><span class="line">            <span class="keyword">const</span> todos = state.todos.slice()</span><br><span class="line">            <span class="keyword">let</span> doneItem: doneState = &#123;</span><br><span class="line">                content: todos.splice(action.index, <span class="number">1</span>)[<span class="number">0</span>],</span><br><span class="line">                date: getDate()</span><br><span class="line">            &#125;</span><br><span class="line">            state.done.push(doneItem)</span><br><span class="line">            todoUtils.setStoreItem(<span class="string">"todos"</span>, todos)</span><br><span class="line">            todoUtils.setStoreItem(<span class="string">"done"</span>, state.done)</span><br><span class="line">            <span class="keyword">return</span> &#123;</span><br><span class="line">                ...state,</span><br><span class="line">                lastUpdated: <span class="built_in">Date</span>.now(),</span><br><span class="line">                todos,</span><br><span class="line">                done: state.done</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">case</span> <span class="string">"cancel todo"</span>: &#123;</span><br><span class="line">            <span class="keyword">const</span> todos = state.todos.slice()</span><br><span class="line">            <span class="keyword">const</span> delItem = todos.splice(action.index, <span class="number">1</span>)</span><br><span class="line">            state.undo.push(delItem[<span class="number">0</span>])</span><br><span class="line">            todoUtils.setStoreItem(<span class="string">"todos"</span>, todos)</span><br><span class="line">            todoUtils.setStoreItem(<span class="string">"undo"</span>, state.undo)</span><br><span class="line">            <span class="keyword">return</span> &#123;</span><br><span class="line">                ...state,</span><br><span class="line">                lastUpdated: <span class="built_in">Date</span>.now(),</span><br><span class="line">                todos,</span><br><span class="line">                undo: state.undo</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;   </span><br><span class="line">        <span class="keyword">case</span> <span class="string">"withdraw todo"</span>: &#123;</span><br><span class="line">            <span class="keyword">const</span> done = state.done.slice()</span><br><span class="line">            <span class="keyword">const</span> delItem = done.splice(action.index, <span class="number">1</span>)[<span class="number">0</span>]</span><br><span class="line">            state.todos.push(delItem.content)</span><br><span class="line">            todoUtils.setStoreItem(<span class="string">"done"</span>, done)</span><br><span class="line">            todoUtils.setStoreItem(<span class="string">"todos"</span>, state.todos)</span><br><span class="line">            <span class="keyword">return</span> &#123;</span><br><span class="line">                ...state,</span><br><span class="line">                lastUpdated: <span class="built_in">Date</span>.now(),</span><br><span class="line">                done,</span><br><span class="line">                todos: state.todos</span><br><span class="line">            &#125;;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">case</span> <span class="string">"delete todo"</span>: &#123;</span><br><span class="line">            <span class="keyword">const</span> undo = state.undo.slice()</span><br><span class="line">            undo.splice(action.index, <span class="number">1</span>)</span><br><span class="line">            todoUtils.setStoreItem(<span class="string">"undo"</span>, undo)</span><br><span class="line">            <span class="keyword">return</span> &#123;</span><br><span class="line">                ...state,</span><br><span class="line">                lastUpdated: <span class="built_in">Date</span>.now(),</span><br><span class="line">                undo</span><br><span class="line">            &#125;;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">case</span> <span class="string">"restore todo"</span>: &#123;</span><br><span class="line">            <span class="keyword">const</span> undo = state.undo.slice();</span><br><span class="line">            <span class="keyword">const</span> delItem = undo.splice(action.index, <span class="number">1</span>);</span><br><span class="line">            state.todos.push(delItem[<span class="number">0</span>]);</span><br><span class="line">            todoUtils.setStoreItem(<span class="string">"undo"</span>,undo);</span><br><span class="line">            todoUtils.setStoreItem(<span class="string">"todos"</span>,state.todos);</span><br><span class="line">            <span class="keyword">return</span> &#123;</span><br><span class="line">              ...state,</span><br><span class="line">              lastUpdated: <span class="built_in">Date</span>.now(),</span><br><span class="line">              undo,</span><br><span class="line">              todos: state.todos</span><br><span class="line">            &#125;;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">default</span>:</span><br><span class="line">            <span class="keyword">return</span> state</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> reducer</span><br></pre></td></tr></table></figure>
+
+<p>注意：</p>
+<ul>
+<li><code>splice</code>用法:</li>
+</ul>
+<blockquote>
+<p>通过删除或替换现有元素或者原地添加新的元素来修改数组,并以数组形式返回被修改的内容。此方法会改变原数组。</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> myFish = [<span class="string">"angel"</span>, <span class="string">"clown"</span>, <span class="string">"mandarin"</span>, <span class="string">"sturgeon"</span>];</span><br><span class="line"><span class="comment">//从第 2 位开始删除 0 个元素，插入“drum”</span></span><br><span class="line"><span class="keyword">var</span> removed = myFish.splice(<span class="number">2</span>, <span class="number">0</span>, <span class="string">"drum"</span>);</span><br><span class="line"><span class="comment">//["angel", "clown", "drum", "guitar", "mandarin", "sturgeon"]</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//从第 3 位开始删除 1 个元素</span></span><br><span class="line"><span class="keyword">var</span> removed = myFish.splice(<span class="number">3</span>, <span class="number">1</span>);</span><br><span class="line"><span class="comment">//["angel", "clown", "mandarin"];</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><code>concat</code>用法：</li>
+</ul>
+<blockquote>
+<p>用于合并两个或多个数组。此方法不会更改现有数组，而是返回一个新数组。</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> num1 = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>],</span><br><span class="line">    num2 = [<span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>],</span><br><span class="line">    num3 = [<span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>];</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> nums = num1.concat(num2, num3);</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(nums); </span><br><span class="line"><span class="comment">// results in [1, 2, 3, 4, 5, 6, 7, 8, 9]</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="2-5-utils-index-tsx"><a href="#2-5-utils-index-tsx" class="headerlink" title="2.5 utils/index.tsx"></a>2.5 <code>utils/index.tsx</code></h3><blockquote>
+<p>用来放置一些需要使用的工具性函数，主要是处理数据</p>
+</blockquote>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> TodoUtils &#123;</span><br><span class="line">    <span class="comment">// 规定为一年有效期</span></span><br><span class="line">    <span class="keyword">public</span> storeAge: <span class="built_in">number</span> = <span class="number">366</span>*<span class="number">24</span>*<span class="number">60</span>*<span class="number">60</span>*<span class="number">1000</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 判断本地数据是否为object，并且内容也为object的，使用toString方法可以查看出来</span></span><br><span class="line">    typeObject(o:<span class="built_in">any</span>):<span class="built_in">string</span> &#123;</span><br><span class="line">        <span class="keyword">var</span> s = <span class="built_in">Object</span>.prototype.toString.call(o);</span><br><span class="line">        <span class="comment">// 匹配是否[object Object], 这里改成小写了</span></span><br><span class="line">        <span class="comment">// 这里会报错 对象可能为空的错误    </span></span><br><span class="line">        <span class="comment">// 解决办法：在tsconfig.ts文件中增加 --strictNullChecks，为false，则不启动对空类型的检查</span></span><br><span class="line">        <span class="keyword">return</span> s.match(<span class="regexp">/\[object (.*?)\]/</span>)[<span class="number">1</span>].toLowerCase()</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 存储本地事项</span></span><br><span class="line">    setStoreItem(key: <span class="built_in">string</span>, value: <span class="built_in">any</span>) &#123;</span><br><span class="line">        localStorage.removeItem(key)</span><br><span class="line">        <span class="keyword">let</span> isObject: <span class="built_in">boolean</span> = <span class="keyword">this</span>.typeObject(value) == <span class="string">'object'</span></span><br><span class="line">        <span class="comment">// 新添加的事项时间</span></span><br><span class="line">        <span class="keyword">const</span> _time = <span class="keyword">new</span> <span class="built_in">Date</span>().getTime();</span><br><span class="line">        <span class="comment">// 有效时长</span></span><br><span class="line">        <span class="keyword">const</span> _age = <span class="keyword">this</span>.storeAge;</span><br><span class="line">        <span class="comment">// 如果不是对象，新建一个对象把value存起来</span></span><br><span class="line">        <span class="keyword">if</span>(!isObject)&#123;</span><br><span class="line">            <span class="keyword">let</span> b:<span class="built_in">any</span> = value</span><br><span class="line">            value = &#123;&#125;</span><br><span class="line">            value._value = b</span><br><span class="line">        &#125;</span><br><span class="line">        value._time = _time</span><br><span class="line">        value._age = _time + _age</span><br><span class="line">        value._isObject = isObject</span><br><span class="line">        localStorage.setItem(key, <span class="built_in">JSON</span>.stringify(value))</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 判断一个localStoreage是否过期</span></span><br><span class="line">    isExpire(key: <span class="built_in">string</span>):<span class="built_in">boolean</span>&#123;</span><br><span class="line">        <span class="keyword">let</span> Expire:<span class="built_in">boolean</span> = <span class="literal">true</span></span><br><span class="line">        <span class="keyword">let</span> value:<span class="built_in">any</span> = localStorage.getItem(key)</span><br><span class="line">        <span class="keyword">const</span> now = <span class="keyword">new</span> <span class="built_in">Date</span>()</span><br><span class="line">        <span class="keyword">if</span>(value) &#123;</span><br><span class="line">            value = <span class="built_in">JSON</span>.parse(value)</span><br><span class="line">            Expire = now &gt; value._age</span><br><span class="line">        &#125;<span class="keyword">else</span> &#123;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> Expire</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 获取相应的事项，并转成数组</span></span><br><span class="line">    getStoreItem(key: <span class="built_in">string</span>) &#123;</span><br><span class="line">        <span class="keyword">let</span> Expire: <span class="built_in">boolean</span> = <span class="keyword">this</span>.isExpire(key)</span><br><span class="line">        <span class="keyword">let</span> value:<span class="built_in">any</span> = <span class="literal">null</span></span><br><span class="line">        <span class="keyword">if</span>(!Expire) &#123; <span class="comment">// 如果没有过期</span></span><br><span class="line">            value = localStorage.getItem(key)</span><br><span class="line">            value = <span class="built_in">JSON</span>.parse(value)</span><br><span class="line">            <span class="keyword">if</span>(!value._isObject) &#123;</span><br><span class="line">                value = value._value</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> value</span><br><span class="line">    &#125;</span><br><span class="line">    removeStoreItem(key: <span class="built_in">string</span>) &#123;</span><br><span class="line">        localStorage.removeItem(key)</span><br><span class="line">    &#125;</span><br><span class="line">    clearStore() &#123;</span><br><span class="line">        localStorage.clear()</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 这里需要new一个对象</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> todoUtils: TodoUtils = <span class="keyword">new</span> TodoUtils()</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-6-jsx的小感悟"><a href="#2-6-jsx的小感悟" class="headerlink" title="2.6 jsx的小感悟"></a>2.6 <code>jsx</code>的小感悟</h3><blockquote>
+<p>jsx真的很牛逼！</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// state取出的数据为</span></span><br><span class="line">data:&#123;</span><br><span class="line">    todo:[<span class="string">'好好'</span>， <span class="string">'学习'</span>],</span><br><span class="line">    done:[</span><br><span class="line">        &#123;</span><br><span class="line">            content:<span class="string">'吃饭'</span>，</span><br><span class="line">            date:<span class="number">121212</span></span><br><span class="line">        &#125;，</span><br><span class="line">        &#123;</span><br><span class="line">        	content:<span class="string">'睡觉'</span>，</span><br><span class="line">            date:<span class="number">121212</span></span><br><span class="line">        &#125;</span><br><span class="line">    ],</span><br><span class="line">    undo:[<span class="string">'hh'</span>,<span class="string">'ww'</span>],</span><br><span class="line">    lastUpdated: lastUpdated</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>所以从state中拿数据还要处理一遍,所以还要在相应组件内使用该函数</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">// 处理 state 中的数据</span><br><span class="line">function handleState(data:any[],type:string):string&#123;</span><br><span class="line">  // item 是遍历的对象属性值</span><br><span class="line">  for(let item in data)&#123;</span><br><span class="line">    //return item</span><br><span class="line">    if(item === type &amp;&amp; type===&apos;todo&apos;)&#123;</span><br><span class="line">      return data[item]</span><br><span class="line">    &#125;else if(item===type &amp;&amp; type===&apos;done&apos;)&#123;</span><br><span class="line">      let doneList:any[]=data[item]</span><br><span class="line">      let handledoneList :any = []</span><br><span class="line">      for(let i=0; i &lt; doneList.length;i++)&#123;</span><br><span class="line">        handledoneList.push(doneList[i].content) </span><br><span class="line">      &#125;</span><br><span class="line">      return handledoneList</span><br><span class="line">    &#125;else if(item===type &amp;&amp; type===&apos;undo&apos;)&#123;</span><br><span class="line">      return data[item]</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>使用只需要<code>{ handleState(data,type) }</code>,自动调用。</p>
+<h3 id="2-7-emotion和-emotion-core是不一样的"><a href="#2-7-emotion和-emotion-core是不一样的" class="headerlink" title="2.7 emotion和 @emotion/core是不一样的"></a>2.7 <code>emotion和 @emotion/core</code>是不一样的</h3><ul>
+<li>使用<code>@emotion/core</code></li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">// 下面张的像注释的不能删除。删除就会报错</span><br><span class="line">/** @jsx jsx */  </span><br><span class="line">import React from &quot;react&quot;;</span><br><span class="line">import &#123; css,jsx &#125; from &quot;@emotion/core&quot;;</span><br><span class="line">import TodoItem from &apos;./TodoItem&apos;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>使用<code>emotion</code></li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">import &#123; css &#125; from &apos;emotion&apos;</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-上传github，删不了node-modules"><a href="#3-上传github，删不了node-modules" class="headerlink" title="3 .上传github，删不了node_modules"></a>3 .上传github，删不了node_modules</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">npm install rimraf -g</span><br><span class="line">rimraf node_modules</span><br></pre></td></tr></table></figure>
+
+<p>参考文章：</p>
+<p><a href="https://segmentfault.com/q/1010000002972327" target="_blank" rel="noopener">https://segmentfault.com/q/1010000002972327</a></p>
+<p><a href="https://juejin.im/post/5c81d10b5188257ee7275222" target="_blank" rel="noopener">https://juejin.im/post/5c81d10b5188257ee7275222</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/React/" rel="tag"># React</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/07/16/sublime-text3安装/" rel="next" title="Express的学习">
+                <i class="fa fa-chevron-left"></i> Express的学习
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/07/16/Express的学习/" rel="prev" title="Express的学习">
+                Express的学习 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">John Doe</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">categories</span>
+                
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">tags</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#React-redux-ts的代办事项"><span class="nav-number">1.</span> <span class="nav-text">React+redux+ts的代办事项</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-创建项目"><span class="nav-number">1.1.</span> <span class="nav-text">1. 创建项目</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-主要说明"><span class="nav-number">1.2.</span> <span class="nav-text">2. 主要说明</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-使用redux-tools"><span class="nav-number">1.2.1.</span> <span class="nav-text">2.1 使用redux-tools</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-使用redux"><span class="nav-number">1.2.2.</span> <span class="nav-text">2.2 使用redux</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-action-ts"><span class="nav-number">1.2.3.</span> <span class="nav-text">2.3 action.ts</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-type-ts"><span class="nav-number">1.2.4.</span> <span class="nav-text">2.3 type.ts</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-4-reducer-ts"><span class="nav-number">1.2.5.</span> <span class="nav-text">2.4 reducer.ts</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-5-utils-index-tsx"><span class="nav-number">1.2.6.</span> <span class="nav-text">2.5 utils/index.tsx</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-6-jsx的小感悟"><span class="nav-number">1.2.7.</span> <span class="nav-text">2.6 jsx的小感悟</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-7-emotion和-emotion-core是不一样的"><span class="nav-number">1.2.8.</span> <span class="nav-text">2.7 emotion和 @emotion/core是不一样的</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-上传github，删不了node-modules"><span class="nav-number">1.3.</span> <span class="nav-text">3 .上传github，删不了node_modules</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
