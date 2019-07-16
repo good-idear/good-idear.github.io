@@ -5,7 +5,7 @@
   
 
 
-<html class="theme-next pisces use-motion" lang>
+<html class="theme-next pisces use-motion" lang="zh-CN">
 <head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -99,9 +99,9 @@
 <meta property="og:type" content="article">
 <meta property="og:title" content="Vue的入门笔记">
 <meta property="og:url" content="http://yoursite.com/2019/07/16/Vue的入门笔记/index.html">
-<meta property="og:site_name" content="Hexo">
+<meta property="og:site_name" content="菜鸡小站">
 <meta property="og:description" content="Vue的入门笔记1.0 vue的项目结构这就是一个项目的结构  config文件夹里的index.js里面可以看到vue.js的一些配置，比如端口号之类的。  node_modules里面存放的是一些第3方包  src里面的项目目录，页面组件和主组件，自定义的 js 代码  assets 主要用来图片等静态静态资源。直接用vue里文件路径引入。(会被webpack打包进代码里面)  compone">
-<meta property="og:locale" content="default">
+<meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="d:%5CTypora%5CExpress%E5%AD%A6%E4%B9%A0%5Cvue%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84.png">
 <meta property="og:image" content="d:%5CTypora%5CExpress%E5%AD%A6%E4%B9%A0%5Cvue%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F.webp">
 <meta property="og:image" content="d:%5CTypora%5CExpress%E5%AD%A6%E4%B9%A0%5Cvuex.png">
@@ -119,7 +119,7 @@
     root: '/',
     scheme: 'Pisces',
     version: '5.1.4',
-    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    sidebar: {"position":"left","display":"always","offset":12,"b2t":true,"scrollpercent":true,"onmobile":false},
     fancybox: true,
     tabs: true,
     motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
@@ -145,7 +145,7 @@
 
 
 
-  <title>Vue的入门笔记 | Hexo</title>
+  <title>Vue的入门笔记 | 菜鸡小站</title>
   
 
 
@@ -157,7 +157,7 @@
 
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
 
   
   
@@ -175,7 +175,7 @@
     <div class="custom-logo-site-title">
       <a href="/" class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
-        <span class="site-title">Hexo</span>
+        <span class="site-title">菜鸡小站</span>
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
@@ -271,7 +271,7 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
+      <meta itemprop="name" content="菜鸡小站">
     </span>
 
     
@@ -570,8 +570,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/07/16/React+redux+typescript/" rel="next" title="React+redux+ts">
-                <i class="fa fa-chevron-left"></i> React+redux+ts
+              <a href="/2019/07/16/linux文件目录的学习/" rel="next" title="linux文件目录的学习">
+                <i class="fa fa-chevron-left"></i> linux文件目录的学习
               </a>
             
           </div>
@@ -579,6 +579,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/07/16/React+redux+typescript/" rel="prev" title="React+redux+ts">
+                React+redux+ts <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -647,7 +651,7 @@
               <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="菜菜鸡">
             
               <p class="site-author-name" itemprop="name">菜菜鸡</p>
-              <p class="site-description motion-element" itemprop="description"></p>
+              <p class="site-description motion-element" itemprop="description">人生何所求，致富与自由</p>
           </div>
 
           <nav class="site-state motion-element">
@@ -743,6 +747,13 @@
       
 
       
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
 
     </div>
   </aside>
@@ -789,11 +800,6 @@
       </div>
     </footer>
 
-    
-      <div class="back-to-top">
-        <i class="fa fa-arrow-up"></i>
-        
-      </div>
     
 
     

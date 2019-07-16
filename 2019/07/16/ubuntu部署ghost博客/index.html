@@ -5,7 +5,7 @@
   
 
 
-<html class="theme-next pisces use-motion" lang>
+<html class="theme-next pisces use-motion" lang="zh-CN">
 <head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -99,9 +99,9 @@
 <meta property="og:type" content="article">
 <meta property="og:title" content="ubuntu部署ghost博客">
 <meta property="og:url" content="http://yoursite.com/2019/07/16/ubuntu部署ghost博客/index.html">
-<meta property="og:site_name" content="Hexo">
+<meta property="og:site_name" content="菜鸡小站">
 <meta property="og:description" content="前言：想要建立ghost博客的应该都有了自己服务器，才到这一步的。所以还需要一些准备工作：  mysql的安装版本要小于8.0的，一般都是5.7 node的安装可以通过nvm安装（最好不要在root用户下安装，因为ghost的安装不能使用root用户，但是如果你是在root用户安装的node的话，在非root用户的权限下是不能使用node的，而且还需要重新安装。这里涉及到了linux的用户权限和其">
-<meta property="og:locale" content="default">
+<meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="d:%5CTypora%5Clinux%E5%AD%A6%E4%B9%A0%5Cghost.jpg">
 <meta property="og:updated_time" content="2019-07-16T02:24:23.657Z">
 <meta name="twitter:card" content="summary">
@@ -117,7 +117,7 @@
     root: '/',
     scheme: 'Pisces',
     version: '5.1.4',
-    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    sidebar: {"position":"left","display":"always","offset":12,"b2t":true,"scrollpercent":true,"onmobile":false},
     fancybox: true,
     tabs: true,
     motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
@@ -143,7 +143,7 @@
 
 
 
-  <title>ubuntu部署ghost博客 | Hexo</title>
+  <title>ubuntu部署ghost博客 | 菜鸡小站</title>
   
 
 
@@ -155,7 +155,7 @@
 
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
 
   
   
@@ -173,7 +173,7 @@
     <div class="custom-logo-site-title">
       <a href="/" class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
-        <span class="site-title">Hexo</span>
+        <span class="site-title">菜鸡小站</span>
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
@@ -269,7 +269,7 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
+      <meta itemprop="name" content="菜鸡小站">
     </span>
 
     
@@ -446,8 +446,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/07/16/win10下使用nvm/" rel="next" title="win10下使用nvm">
-                <i class="fa fa-chevron-left"></i> win10下使用nvm
+              <a href="/2019/07/16/webpack配置和React/" rel="next" title="webpack配置和React">
+                <i class="fa fa-chevron-left"></i> webpack配置和React
               </a>
             
           </div>
@@ -527,7 +527,7 @@
               <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="菜菜鸡">
             
               <p class="site-author-name" itemprop="name">菜菜鸡</p>
-              <p class="site-description motion-element" itemprop="description"></p>
+              <p class="site-description motion-element" itemprop="description">人生何所求，致富与自由</p>
           </div>
 
           <nav class="site-state motion-element">
@@ -623,6 +623,13 @@
       
 
       
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
 
     </div>
   </aside>
@@ -669,11 +676,6 @@
       </div>
     </footer>
 
-    
-      <div class="back-to-top">
-        <i class="fa fa-arrow-up"></i>
-        
-      </div>
     
 
     
